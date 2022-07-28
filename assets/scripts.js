@@ -11,9 +11,7 @@ searchButton.addEventListener('click', handlingUserInput );
 
 function handlingUserInput() {
     let city = document.getElementById("userInput").value;
-    return city;
-
-    getCoordinates()
+    console.log(city)
 }
 
 

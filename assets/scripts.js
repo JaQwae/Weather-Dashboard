@@ -5,14 +5,44 @@
 // GIVEN a weather dashboard with form inputs
 // WHEN I search for a city
 // THEN I am presented with current and future conditions for that city and that city is added to the search history
-    // A place to search
-    // button
-        // upon click
-        // linking api 
-            // takes input of search box and insert it into api
+
+const searchButton = document.getElementById('search-button');
+searchButton.addEventListener('click', handlingUserInput );
+
+function handlingUserInput() {
+    let city = document.getElementById("userInput").value;
+    return city;
+
+    getCoordinates()
+}
+
+
+// getting long and lat values
+// function getCoordinates(city)
+//     let requestUrl = 'http://api.openweathermap.org/geo/1.0/direct?q='+ city +'&limit=5&appid={API key}';
+
+//     fetch(requestUrl)
+//         .then(function (response) {
+//             return response.json();
+//     })
+
+//Weather API that uses values of long and lat
+// function getApi () {
+//     let requestUrl = 'https://api.openweathermap.org/data/2.5/onecall?lat={lat}&lon={lon}&exclude={part}&appid={API key}';
+
+//     fetch(requestUrl)
+//         .then(function (response) {
+//             return response.json();
+    
+//     })
+// }
+
         // 
     // figure out how to get current and future conditions if possible
     // Saved location to search history
+
+
+
 
 
 // WHEN I view current weather conditions for that city

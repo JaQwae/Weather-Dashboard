@@ -2,12 +2,15 @@
 // I WANT to see the weather outlook for multiple cities
 // SO THAT I can plan a trip accordingly
 
-
 // GIVEN a weather dashboard with form inputs
 // WHEN I search for a city
 // THEN I am presented with current and future conditions for that city and that city is added to the search history
     // A place to search
-    // linking api to that search box
+    // button
+        // upon click
+        // linking api 
+            // takes input of search box and insert it into api
+        // 
     // figure out how to get current and future conditions if possible
     // Saved location to search history
 

@@ -1,0 +1,8 @@
+/* Styling for header icons */
+#header-container{
+    background-image: linear-gradient(.25turn, lightgreen, green, yellow, orange, red, rgb(245, 65, 239), white);
+    text-align: center;
+}
+#header-icon{
+    height: 60px;
+}

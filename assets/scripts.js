@@ -11,18 +11,26 @@ searchButton.addEventListener('click', handlingUserInput );
 
 function handlingUserInput() {
     let city = document.getElementById("userInput").value;
-    console.log(city)
+    // console.log(city);
+    getCoordinates(city);
 }
 
 
-// getting long and lat values
-// function getCoordinates(city)
-//     let requestUrl = 'http://api.openweathermap.org/geo/1.0/direct?q='+ city +'&limit=5&appid={API key}';
+// gets lon and lat values
+function getCoordinates(city) {
+    let requestUrl = 'http://api.openweathermap.org/geo/1.0/direct?q='+ city +'&limit=5&appid=9fa809658341d19670907599fff8fcdc';
 
-//     fetch(requestUrl)
-//         .then(function (response) {
-//             return response.json();
-//     })
+    fetch(requestUrl)
+    .then(function (response) {
+        return response.json();
+    })
+    .then(function (data) {
+        let lat = data[0].lat;
+        let lon = data[0].lon;
+        // console.log(lat)
+        // console.log(lon)
+    });
+}
 
 //Weather API that uses values of long and lat
 // function getApi () {

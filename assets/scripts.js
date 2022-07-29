@@ -29,19 +29,22 @@ function getCoordinates(city) {
         let lon = data[0].lon;
         // console.log(lat)
         // console.log(lon)
+        getCurrentWeather(lat, lon);
     });
 }
 
-//Weather API that uses values of long and lat
-// function getApi () {
-//     let requestUrl = 'https://api.openweathermap.org/data/2.5/onecall?lat={lat}&lon={lon}&exclude={part}&appid={API key}';
+//Weather API that uses values of lon and lat
+function getCurrentWeather(lat, lon) {
+    let requestUrl = 'https://api.openweathermap.org/data/2.5/onecall?lat='+ lat +'&lon='+ lon +'&appid=9fa809658341d19670907599fff8fcdc';
 
-//     fetch(requestUrl)
-//         .then(function (response) {
-//             return response.json();
-    
-//     })
-// }
+    fetch(requestUrl)
+        .then(function (response) {
+            return response.json();
+    })
+    .then(function (data) {
+        console.log(data.current);
+    });
+}
 
         // 
     // figure out how to get current and future conditions if possible

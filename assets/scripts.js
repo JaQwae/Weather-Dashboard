@@ -11,7 +11,6 @@ searchButton.addEventListener('click', handlingUserInput );
 
 function handlingUserInput() {
     let city = document.getElementById("userInput").value;
-    // console.log(city);
     getCoordinates(city);
     displayName(city);
 }
@@ -28,13 +27,12 @@ function getCoordinates(city) {
     .then(function (data) {
         let lat = data[0].lat;
         let lon = data[0].lon;
-        // console.log(lat)
-        // console.log(lon)
+        
         getCurrentWeather(lat, lon);
     });
 }
 
-//Weather API that uses values of lon and lat
+//Weather API 
 function getCurrentWeather(lat, lon) {
     let requestUrl = 'https://api.openweathermap.org/data/2.5/onecall?lat='+ lat +'&lon='+ lon +'&appid=9fa809658341d19670907599fff8fcdc';
 
@@ -43,11 +41,17 @@ function getCurrentWeather(lat, lon) {
             return response.json();
     })
     .then(function (data) {
-        // console.log(data);
-        // returns date
+        // grabs unix time
         currentDate = data.current.dt;
-        // console.log(currentDate);
-        displayDate(currentDate);
+        displayCurrentDate(currentDate);
+
+        //grabs icon
+        currentIcon = data.current.weather[0].icon;
+        displayingCurrentIcon(currentIcon);
+
+        // grabs temp
+        currentTemp = data.current.temp;
+        currentTempDisplay(currentTemp);
     });
 
 }
@@ -61,32 +65,39 @@ function getCurrentWeather(lat, lon) {
 
 // WHEN I view current weather conditions for that city
 // THEN I am presented with the city name, the date, an icon representation of weather conditions, the temperature, the humidity, the wind speed, and the UV index
-let cityName = document.getElementById('city-name')    
-//displays current city name 
+
 function displayName(city){
-    if (cityName != null){
-        cityName.textContent ='';
-        cityName.textContent = city;
-    } else{
-        cityName.textContent = city;
-    }
+    let cityName = document.getElementById('city-name')    
+    cityName.textContent = city;
 }
 
-let cityDate = document.getElementById('current-date')
-//displays a current readable date
-function displayDate(currentDate){
+//displays current date in MM/DD/YY format (could you condense code here and make use for 5 day forecast?)
+function displayCurrentDate(currentDate){
+    let currentCityDate = document.getElementById('current-date')
     let currentUnixTime = currentDate;
     let currentUnixTimeMs = currentDate * 1000;
     let currentUnixDate = new Date(currentUnixTimeMs);
     let currentDateFormated = new Intl.DateTimeFormat('en-US').format(currentUnixDate);
-    // console.log(currentDateFormated);
 
-    if (cityDate != null){
-        cityDate.textContent ='';
-        cityDate.textContent = currentDateFormated;
-    } else{
-        cityDate.textContent = currentDateFormated;
-    }
+    currentCityDate.textContent = currentDateFormated;
+}
+
+//display weather icon (could you condense code here and make use for 5 day forecast?)
+function displayingCurrentIcon (){
+    currentWeatherIcon = document.getElementById('current-weather-icon').src="http://openweathermap.org/img/w/"+ currentIcon +".png";    
+    
+    currentIcon.textContent = currentIcon;
+    
+}
+
+//displays converts temp from K to F (could you condense code here and make use for 5 day forecast?)
+currentFTemp = document.getElementById('current-temp')
+function currentTempDisplay(temp){
+    currentF = 1.8*(temp-273) + 32;
+    roundedcurrentF = currentF.toFixed()
+
+    currentFTemp.textContent = roundedcurrentF;
+    
 }
 
 

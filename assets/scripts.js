@@ -43,8 +43,13 @@ function getCurrentWeather(lat, lon) {
             return response.json();
     })
     .then(function (data) {
-        console.log(data);
+        // console.log(data);
+        // returns date
+        currentDate = data.current.dt;
+        // console.log(currentDate);
+        displayDate(currentDate);
     });
+
 }
 
     
@@ -57,15 +62,32 @@ function getCurrentWeather(lat, lon) {
 // WHEN I view current weather conditions for that city
 // THEN I am presented with the city name, the date, an icon representation of weather conditions, the temperature, the humidity, the wind speed, and the UV index
 let cityName = document.getElementById('city-name')    
-//displaying city name 
-    function displayName(city){
-        if (cityName != null){
-            cityName.textContent ='';
-            cityName.textContent = city;
-        } else{
-            cityName.textContent = city;
-        }
+//displays current city name 
+function displayName(city){
+    if (cityName != null){
+        cityName.textContent ='';
+        cityName.textContent = city;
+    } else{
+        cityName.textContent = city;
     }
+}
+
+let cityDate = document.getElementById('current-date')
+//displays a current readable date
+function displayDate(currentDate){
+    let currentUnixTime = currentDate;
+    let currentUnixTimeMs = currentDate * 1000;
+    let currentUnixDate = new Date(currentUnixTimeMs);
+    let currentDateFormated = new Intl.DateTimeFormat('en-US').format(currentUnixDate);
+    // console.log(currentDateFormated);
+
+    if (cityDate != null){
+        cityDate.textContent ='';
+        cityDate.textContent = currentDateFormated;
+    } else{
+        cityDate.textContent = currentDateFormated;
+    }
+}
 
 
 

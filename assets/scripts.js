@@ -52,6 +52,11 @@ function getCurrentWeather(lat, lon) {
         // grabs temp
         currentTemp = data.current.temp;
         currentTempDisplay(currentTemp);
+
+        // grabs humidity
+        humidity = data.current.humidity;
+        // console.log(humidity);
+        currentHumidityDisplay(humidity)
     });
 
 }
@@ -84,14 +89,14 @@ function displayCurrentDate(currentDate){
 
 //display weather icon (could you condense code here and make use for 5 day forecast?)
 function displayingCurrentIcon (){
-    currentWeatherIcon = document.getElementById('current-weather-icon').src="http://openweathermap.org/img/w/"+ currentIcon +".png";    
+    let currentWeatherIcon = document.getElementById('current-weather-icon').src="http://openweathermap.org/img/w/"+ currentIcon +".png";    
     
     currentIcon.textContent = currentIcon;
     
 }
 
-//displays converts temp from K to F (could you condense code here and make use for 5 day forecast?)
-currentFTemp = document.getElementById('current-temp')
+//displays converted temp from K to F (could you condense code here and make use for 5 day forecast?)
+let currentFTemp = document.getElementById('current-temp');
 function currentTempDisplay(temp){
     currentF = 1.8*(temp-273) + 32;
     roundedcurrentF = currentF.toFixed()
@@ -100,6 +105,18 @@ function currentTempDisplay(temp){
     
 }
 
+//displays humidity value (could you condense code here and make use for 5 day forecast?)
+let currentHumidity = document.getElementById('current-humidity');
+function currentHumidityDisplay(humidity) {
+    currentHumidityFormat = humidity + '%';
+
+    currentHumidity.textContent = currentHumidityFormat;
+}
+
+let currentWindSpeed = document.getElementById('current-wind-speed');
+
+
+let uV = document.getElementById('uv-index');
 
 
 // WHEN I view the UV index

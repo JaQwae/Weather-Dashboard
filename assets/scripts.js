@@ -13,6 +13,7 @@ function handlingUserInput() {
     let city = document.getElementById("userInput").value;
     // console.log(city);
     getCoordinates(city);
+    displayName(city);
 }
 
 
@@ -42,13 +43,12 @@ function getCurrentWeather(lat, lon) {
             return response.json();
     })
     .then(function (data) {
-        console.log(data.current);
+        console.log(data);
     });
 }
 
-        // 
-    // figure out how to get current and future conditions if possible
-    // Saved location to search history
+    
+    // Saved location to search history*******
 
 
 
@@ -56,10 +56,16 @@ function getCurrentWeather(lat, lon) {
 
 // WHEN I view current weather conditions for that city
 // THEN I am presented with the city name, the date, an icon representation of weather conditions, the temperature, the humidity, the wind speed, and the UV index
-    // create a section tag with an ID of currentWeather
-        // h1 tag city and corresponding weather icon
-        // h2 tag date
-        // div including the the temperature, the humidity, the wind speed, and the UV index
+let cityName = document.getElementById('city-name')    
+//displaying city name 
+    function displayName(city){
+        if (cityName != null){
+            cityName.textContent ='';
+            cityName.textContent = city;
+        } else{
+            cityName.textContent = city;
+        }
+    }
 
 
 
@@ -83,9 +89,10 @@ function getCurrentWeather(lat, lon) {
 
 // WHEN I click on a city in the search history
 // THEN I am again presented with current and future conditions for that city
-    // add event lister?
-    // drop down tab?
-    // event propagation?
+    //add button for history
+    // history buttons take input from search 
+    // add event lister on search buttons
+    // make an if statement on if the value is from the search or the local 
     // Once click how would I go about directing it to search
         // link to search button
         // value pairs like local storage

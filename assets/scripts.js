@@ -105,7 +105,7 @@ function displayingCurrentIcon (){
 let currentFTemp = document.getElementById('current-temp');
 function currentTempDisplay(temp){
     currentF = 1.8*(temp-273) + 32;
-    roundedcurrentF = currentF.toFixed()
+    roundedcurrentF = currentF.toFixed() + " °F";
 
     currentFTemp.textContent = roundedcurrentF;
     

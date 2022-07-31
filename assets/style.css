@@ -12,15 +12,18 @@
     height: 60px;
 }
 
-/* UV index */
-.low{
-    background-color: green;
-}
 
-.med{
-    background-color: yellow;
-}
+.item1 { grid-area: menu; }
+.item2 { grid-area: main; }
+.item3 { grid-area: right; }
+.item4 { grid-area: footer; }
 
-.high{
-    background-color: red;
+.grid-container {
+    display: grid;
+    grid-template-areas:
+        'menu main main main right right'
+        'menu footer footer footer footer footer';
+    gap: 10px;
+    background-color: #2196F3;
+    padding: 10px;
 }

@@ -13,7 +13,9 @@
 }
 
 
-.item1 { grid-area: menu; }
+.item1 { grid-area: menu; 
+    background-color: rgba(78, 140, 247, 0.229);
+}
 .item2 { grid-area: main; }
 .item3 { grid-area: right; }
 .item4 { grid-area: footer; }
@@ -24,6 +26,5 @@
         'menu main main main right right'
         'menu footer footer footer footer footer';
     gap: 10px;
-    background-color: #2196F3;
     padding: 10px;
 }

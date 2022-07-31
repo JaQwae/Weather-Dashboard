@@ -63,10 +63,17 @@ function getCurrentWeather(lat, lon) {
         currentWindSpeed = data.current.wind_speed;
         displayCurrentWindSpeed(currentWindSpeed);
         
-        // grabs current UV value (why was daily high value not working)
+        // grabs current UV value
         uvValue = data.current.uvi;
         displayUvIndex (uvValue);
         uvIndicator (uvValue);
+
+        // grabs forecasted weather temp
+        futureTemp = data.daily.temp;
+        // displayForecastedTemp (futureTemp);
+        console.log(futureTemp)
+
+
 
     })
 
@@ -119,13 +126,14 @@ function currentHumidityDisplay(currentHumidityValue) {
     currentHumidityPlaceholder.textContent = currentHumidityFormat;
 }
 
+//displays wind speed (could you condense code here and make use for 5 day forecast?)
 let currentWindSpeedPlaceholder = document.getElementById('current-wind-speed');
 function displayCurrentWindSpeed(currentWindSpeed) {
     let = mphCurrentWindSpeed = (currentWindSpeed * 2.236936).toFixed(2) + ' mph';
     currentWindSpeedPlaceholder.textContent = mphCurrentWindSpeed;
 }
 
-
+// displays uv value
 let uv = document.getElementById('uv-index');
 function displayUvIndex (uvValue){
     uv.textContent = uvValue;
@@ -154,8 +162,11 @@ function uvIndicator (uvValue) {
 
 // WHEN I view future weather conditions for that city
 // THEN I am presented with a 5-day forecast that displays the date, an icon representation of weather conditions, the temperature, the wind speed, and the humidity
-    // flex box or d flex
-    // similar set up as the main display
+// let = forecastedTemp = document.getElementById('forecasted-temp');
+// function displayForecastedTemp (futureTemp) {
+//     forecastedTemp.textContent = forecastedTemp
+//     console.log(forecastedTemp)
+// }
 
 
 

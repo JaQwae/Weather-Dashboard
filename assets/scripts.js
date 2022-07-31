@@ -32,6 +32,8 @@ function getCoordinates(city) {
     });
 }
 
+
+
 //Weather API 
 function getCurrentWeather(lat, lon) {
     let requestUrl = 'https://api.openweathermap.org/data/2.5/onecall?lat='+ lat +'&lon='+ lon +'&appid=9fa809658341d19670907599fff8fcdc';
@@ -54,17 +56,21 @@ function getCurrentWeather(lat, lon) {
         currentTempDisplay(currentTemp);
 
         // grabs humidity
-        humidity = data.current.humidity;
-        // console.log(humidity);
-        currentHumidityDisplay(humidity)
-    });
+        currentHumidityValue = data.current.humidity;
+        currentHumidityDisplay(currentHumidityValue);
+
+        //grab current wind speed
+        currentWindSpeed = data.current.wind_speed;
+        displayCurrentWindSpeed(currentWindSpeed);
+        
+        // grabs current UV value (why was daily high value not working)
+        uvValue = data.current.uvi;
+        displayUvIndex (uvValue);
+        uvIndicator (uvValue);
+
+    })
 
 }
-
-    
-    // Saved location to search history*******
-
-
 
 
 
@@ -106,27 +112,43 @@ function currentTempDisplay(temp){
 }
 
 //displays humidity value (could you condense code here and make use for 5 day forecast?)
-let currentHumidity = document.getElementById('current-humidity');
-function currentHumidityDisplay(humidity) {
-    currentHumidityFormat = humidity + '%';
+let currentHumidityPlaceholder = document.getElementById('current-humidity');
+function currentHumidityDisplay(currentHumidityValue) {
+    currentHumidityFormat = currentHumidityValue + '%';
 
-    currentHumidity.textContent = currentHumidityFormat;
+    currentHumidityPlaceholder.textContent = currentHumidityFormat;
 }
 
-let currentWindSpeed = document.getElementById('current-wind-speed');
+let currentWindSpeedPlaceholder = document.getElementById('current-wind-speed');
+function displayCurrentWindSpeed(currentWindSpeed) {
+    let = mphCurrentWindSpeed = (currentWindSpeed * 2.236936).toFixed(2) + ' mph';
+    currentWindSpeedPlaceholder.textContent = mphCurrentWindSpeed;
+}
 
 
-let uV = document.getElementById('uv-index');
+let uv = document.getElementById('uv-index');
+function displayUvIndex (uvValue){
+    uv.textContent = uvValue;
+}
 
 
 // WHEN I view the UV index
 // THEN I am presented with a color that indicates whether the conditions are favorable, moderate, or severe
-    // create a conditional statement
-        // what is consider favorable
-        // apply css
-            // bg color effect for sure
-            // fav = green, mod = yellow, ser = red
-            // maybe add icons that matches condition levels
+
+// changes color depending on if the UV is low, moderate, high, very high, or severe.
+function uvIndicator (uvValue) {
+    if (uvValue <= 2.9) {
+        uv.style.backgroundColor = 'green';
+    } else if (uvValue >= 3 && uvValue <= 5.9){
+        uv.style.backgroundColor = 'yellow';
+    } else if (uvValue >= 6 && uvValue <= 7.9 ){
+        uv.style.backgroundColor = 'orange';
+    } else if (uvValue >= 8 && uvValue < 11) {
+        uv.style.backgroundColor = 'red';
+    } else {
+        uv.style.backgroundColor = 'var(--purple-color)';
+    }
+} 
 
 
 

@@ -1,8 +1,26 @@
+:root{
+    --purple-color: rgb(245, 65, 239);
+}
+
 /* Styling for header icons */
 #header-container{
-    background-image: linear-gradient(.25turn, lightgreen, green, yellow, orange, red, rgb(245, 65, 239), white);
+    background-image: linear-gradient(.25turn, lightgreen, green, yellow, orange, red, var(--purple-color), white);
     text-align: center;
 }
+
 #header-icon{
     height: 60px;
+}
+
+/* UV index */
+.low{
+    background-color: green;
+}
+
+.med{
+    background-color: yellow;
+}
+
+.high{
+    background-color: red;
 }

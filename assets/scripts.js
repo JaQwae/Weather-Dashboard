@@ -36,7 +36,7 @@ function getCoordinates(city) {
 
 //Weather API 
 function getCurrentWeather(lat, lon) {
-    let requestUrl = 'https://api.openweathermap.org/data/2.5/onecall?lat='+ lat +'&lon='+ lon +'&appid=9fa809658341d19670907599fff8fcdc';
+    let requestUrl = 'https://api.openweathermap.org/data/2.5/onecall?lat='+ lat +'&lon='+ lon +'&units=imperial&appid=9fa809658341d19670907599fff8fcdc';
 
     fetch(requestUrl)
         .then(function (response) {
@@ -67,17 +67,21 @@ function getCurrentWeather(lat, lon) {
         uvValue = data.current.uvi;
         displayUvIndex (uvValue);
         uvIndicator (uvValue);
-
-        // grabs forecasted weather temp
-        futureTemp = data.daily.temp;
-        // displayForecastedTemp (futureTemp);
-        console.log(futureTemp)
-
-
-
     })
 
 }
+// function getCurrentWeather(lat, lon) {
+//     let requestUrl = 'https://api.openweathermap.org/data/2.5/onecall?lat='+ lat +'&lon='+ lon +'&units=imperial&appid=9fa809658341d19670907599fff8fcdc';
+
+//     fetch(requestUrl)
+//         .then(function (response) {
+//             return response.json();
+//     })
+//     .then(function (data) {
+        
+//     })
+
+// }
 
 
 
@@ -102,35 +106,28 @@ function displayCurrentDate(currentDate){
 
 //display weather icon (could you condense code here and make use for 5 day forecast?)
 function displayingCurrentIcon (){
-    let currentWeatherIcon = document.getElementById('current-weather-icon').src="http://openweathermap.org/img/w/"+ currentIcon +".png";    
-    
+    let currentWeatherIcon = document.getElementById('current-weather-icon').src="http://openweathermap.org/img/w/"+ currentIcon +".png"; 
     currentIcon.textContent = currentIcon;
     
 }
 
 //displays converted temp from K to F (could you condense code here and make use for 5 day forecast?)
 let currentFTemp = document.getElementById('current-temp');
-function currentTempDisplay(temp){
-    currentF = 1.8*(temp-273) + 32;
-    roundedcurrentF = currentF.toFixed() + " °F";
-
-    currentFTemp.textContent = roundedcurrentF;
-    
+function currentTempDisplay(currentTemp){
+    currentFTemp.textContent = currentTemp.toFixed() + " °F";
 }
 
 //displays humidity value (could you condense code here and make use for 5 day forecast?)
 let currentHumidityPlaceholder = document.getElementById('current-humidity');
 function currentHumidityDisplay(currentHumidityValue) {
     currentHumidityFormat = currentHumidityValue + '%';
-
     currentHumidityPlaceholder.textContent = currentHumidityFormat;
 }
 
 //displays wind speed (could you condense code here and make use for 5 day forecast?)
 let currentWindSpeedPlaceholder = document.getElementById('current-wind-speed');
 function displayCurrentWindSpeed(currentWindSpeed) {
-    let = mphCurrentWindSpeed = (currentWindSpeed * 2.236936).toFixed(2) + ' mph';
-    currentWindSpeedPlaceholder.textContent = mphCurrentWindSpeed;
+    currentWindSpeedPlaceholder.textContent = currentWindSpeed.toFixed(2) + ' mph';
 }
 
 // displays uv value

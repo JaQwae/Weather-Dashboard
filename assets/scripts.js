@@ -29,6 +29,7 @@ function getCoordinates(city) {
         let lon = data[0].lon;
         
         getCurrentWeather(lat, lon);
+        getFiveDayWeather(lat, lon)
     });
 }
 
@@ -70,21 +71,59 @@ function getCurrentWeather(lat, lon) {
     })
 
 }
-// function getCurrentWeather(lat, lon) {
-//     let requestUrl = 'https://api.openweathermap.org/data/2.5/onecall?lat='+ lat +'&lon='+ lon +'&units=imperial&appid=9fa809658341d19670907599fff8fcdc';
+function getFiveDayWeather(lat, lon) {
+    let requestUrl = 'https://api.openweathermap.org/data/2.5/forecast?lat='+ lat +'&lon='+ lon +'&units=imperial&appid=9fa809658341d19670907599fff8fcdc';
 
-//     fetch(requestUrl)
-//         .then(function (response) {
-//             return response.json();
-//     })
-//     .then(function (data) {
-        
-//     })
+    fetch(requestUrl)
+        .then(function (response) {
+            return response.json();
+    })
+    .then(function (data) {
+        oneDayOutDate = data.list[4].dt;
+        twoDaysOutDate = data.list[10].dt;
+        threeDaysOutDate = data.list[18].dt;
+        fourDaysOutDate = data.list[26].dt;
+        fiveDaysOutDate = data.list[34].dt;
+        displayFutureDates(oneDayOutDate, twoDaysOutDate, threeDaysOutDate, fourDaysOutDate, fiveDaysOutDate);
+    })
+}
 
-// }
+function displayFutureDates(oneDayOutDate, twoDaysOutDate, threeDaysOutDate, fourDaysOutDate, fiveDaysOutDate){
+    // displays next days date
+    let oneDayOutCityDate = document.getElementById('one-day-out-date');
+    let unixTimeOneDayOutMs = oneDayOutDate * 1000;
+    let unixOneDayOutDate = new Date(unixTimeOneDayOutMs);
+    let oneDayOutDateFormatted = new Intl.DateTimeFormat('en-US').format(unixOneDayOutDate);
+    oneDayOutCityDate.textContent = oneDayOutDateFormatted;
 
+    // displays date two days out
+    let twoDaysOutCityDate = document.getElementById('two-days-out-date');
+    let unixTimeTwoDaysOutMs = twoDaysOutDate * 1000;
+    let unixTwoDaysOutDate = new Date(unixTimeTwoDaysOutMs);
+    let twoDaysOutDateFormatted = new Intl.DateTimeFormat('en-US').format(unixTwoDaysOutDate);
+    twoDaysOutCityDate.textContent = twoDaysOutDateFormatted;
 
+    // displays date three days out
+    let threeDaysOutCityDate = document.getElementById('three-days-out-date');
+    let unixTimeThreeDaysOutMs = threeDaysOutDate * 1000;
+    let unixThreeDaysOutDate = new Date(unixTimeThreeDaysOutMs);
+    let threeDaysOutDateFormatted = new Intl.DateTimeFormat('en-US').format(unixThreeDaysOutDate);
+    threeDaysOutCityDate.textContent = threeDaysOutDateFormatted;
 
+    // displays date four days out
+    let fourDaysOutCityDate = document.getElementById('four-days-out-date');
+    let unixTimeFourDaysOutMs = fourDaysOutDate * 1000;
+    let unixFourDaysOutDate = new Date(unixTimeFourDaysOutMs);
+    let fourDaysOutDateFormatted = new Intl.DateTimeFormat('en-US').format(unixFourDaysOutDate);
+    fourDaysOutCityDate.textContent = fourDaysOutDateFormatted;
+
+    // displays date five days out
+    let fiveDaysOutCityDate = document.getElementById('five-days-out-date');
+    let unixTimeFiveDaysOutMs = fiveDaysOutDate * 1000;
+    let unixFiveDaysOutDate = new Date(unixTimeFiveDaysOutMs);
+    let fiveDaysOutDateFormatted = new Intl.DateTimeFormat('en-US').format(unixFiveDaysOutDate);
+    fiveDaysOutCityDate.textContent = fiveDaysOutDateFormatted;
+}
 // WHEN I view current weather conditions for that city
 // THEN I am presented with the city name, the date, an icon representation of weather conditions, the temperature, the humidity, the wind speed, and the UV index
 
@@ -96,7 +135,6 @@ function displayName(city){
 //displays current date in MM/DD/YY format (could you condense code here and make use for 5 day forecast?)
 function displayCurrentDate(currentDate){
     let currentCityDate = document.getElementById('current-date')
-    let currentUnixTime = currentDate;
     let currentUnixTimeMs = currentDate * 1000;
     let currentUnixDate = new Date(currentUnixTimeMs);
     let currentDateFormated = new Intl.DateTimeFormat('en-US').format(currentUnixDate);

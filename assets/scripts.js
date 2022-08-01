@@ -69,60 +69,6 @@ function getCurrentWeather(lat, lon) {
         displayUvIndex (uvValue);
         uvIndicator (uvValue);
     })
-
-}
-function getFiveDayWeather(lat, lon) {
-    let requestUrl = 'https://api.openweathermap.org/data/2.5/forecast?lat='+ lat +'&lon='+ lon +'&units=imperial&appid=9fa809658341d19670907599fff8fcdc';
-
-    fetch(requestUrl)
-        .then(function (response) {
-            return response.json();
-    })
-    .then(function (data) {
-        oneDayOutDate = data.list[4].dt;
-        twoDaysOutDate = data.list[10].dt;
-        threeDaysOutDate = data.list[18].dt;
-        fourDaysOutDate = data.list[26].dt;
-        fiveDaysOutDate = data.list[34].dt;
-        displayFutureDates(oneDayOutDate, twoDaysOutDate, threeDaysOutDate, fourDaysOutDate, fiveDaysOutDate);
-    })
-}
-
-function displayFutureDates(oneDayOutDate, twoDaysOutDate, threeDaysOutDate, fourDaysOutDate, fiveDaysOutDate){
-    // displays next days date
-    let oneDayOutCityDate = document.getElementById('one-day-out-date');
-    let unixTimeOneDayOutMs = oneDayOutDate * 1000;
-    let unixOneDayOutDate = new Date(unixTimeOneDayOutMs);
-    let oneDayOutDateFormatted = new Intl.DateTimeFormat('en-US').format(unixOneDayOutDate);
-    oneDayOutCityDate.textContent = oneDayOutDateFormatted;
-
-    // displays date two days out
-    let twoDaysOutCityDate = document.getElementById('two-days-out-date');
-    let unixTimeTwoDaysOutMs = twoDaysOutDate * 1000;
-    let unixTwoDaysOutDate = new Date(unixTimeTwoDaysOutMs);
-    let twoDaysOutDateFormatted = new Intl.DateTimeFormat('en-US').format(unixTwoDaysOutDate);
-    twoDaysOutCityDate.textContent = twoDaysOutDateFormatted;
-
-    // displays date three days out
-    let threeDaysOutCityDate = document.getElementById('three-days-out-date');
-    let unixTimeThreeDaysOutMs = threeDaysOutDate * 1000;
-    let unixThreeDaysOutDate = new Date(unixTimeThreeDaysOutMs);
-    let threeDaysOutDateFormatted = new Intl.DateTimeFormat('en-US').format(unixThreeDaysOutDate);
-    threeDaysOutCityDate.textContent = threeDaysOutDateFormatted;
-
-    // displays date four days out
-    let fourDaysOutCityDate = document.getElementById('four-days-out-date');
-    let unixTimeFourDaysOutMs = fourDaysOutDate * 1000;
-    let unixFourDaysOutDate = new Date(unixTimeFourDaysOutMs);
-    let fourDaysOutDateFormatted = new Intl.DateTimeFormat('en-US').format(unixFourDaysOutDate);
-    fourDaysOutCityDate.textContent = fourDaysOutDateFormatted;
-
-    // displays date five days out
-    let fiveDaysOutCityDate = document.getElementById('five-days-out-date');
-    let unixTimeFiveDaysOutMs = fiveDaysOutDate * 1000;
-    let unixFiveDaysOutDate = new Date(unixTimeFiveDaysOutMs);
-    let fiveDaysOutDateFormatted = new Intl.DateTimeFormat('en-US').format(unixFiveDaysOutDate);
-    fiveDaysOutCityDate.textContent = fiveDaysOutDateFormatted;
 }
 // WHEN I view current weather conditions for that city
 // THEN I am presented with the city name, the date, an icon representation of weather conditions, the temperature, the humidity, the wind speed, and the UV index
@@ -144,7 +90,7 @@ function displayCurrentDate(currentDate){
 
 //display weather icon (could you condense code here and make use for 5 day forecast?)
 function displayingCurrentIcon (){
-    let currentWeatherIcon = document.getElementById('current-weather-icon').src="http://openweathermap.org/img/w/"+ currentIcon +".png"; 
+    document.getElementById('current-weather-icon').src="http://openweathermap.org/img/w/"+ currentIcon +".png"; 
     currentIcon.textContent = currentIcon;
     
 }
@@ -197,13 +143,70 @@ function uvIndicator (uvValue) {
 
 // WHEN I view future weather conditions for that city
 // THEN I am presented with a 5-day forecast that displays the date, an icon representation of weather conditions, the temperature, the wind speed, and the humidity
-// let = forecastedTemp = document.getElementById('forecasted-temp');
-// function displayForecastedTemp (futureTemp) {
-//     forecastedTemp.textContent = forecastedTemp
-//     console.log(forecastedTemp)
-// }
+function getFiveDayWeather(lat, lon) {
+    let requestUrl = 'https://api.openweathermap.org/data/2.5/forecast?lat='+ lat +'&lon='+ lon +'&units=imperial&appid=9fa809658341d19670907599fff8fcdc';
 
+    fetch(requestUrl)
+        .then(function (response) {
+            return response.json();
+    })
+    .then(function (data) {
+        // pull dates for the next five days
+        oneDayOutDate = data.list[4].dt;
+        twoDaysOutDate = data.list[10].dt;
+        threeDaysOutDate = data.list[18].dt;
+        fourDaysOutDate = data.list[26].dt;
+        fiveDaysOutDate = data.list[34].dt;
+        displayFutureDates(oneDayOutDate, twoDaysOutDate, threeDaysOutDate, fourDaysOutDate, fiveDaysOutDate);
 
+        // pull icons for the next five days
+        oneDayOutIcon = data.list[4].weather[0].id;
+        displayingFutureIcons (oneDayOutIcon)
+    })
+}
+
+function displayFutureDates(oneDayOutDate, twoDaysOutDate, threeDaysOutDate, fourDaysOutDate, fiveDaysOutDate){
+    // displays next days date
+    let oneDayOutCityDate = document.getElementById('one-day-out-date');
+    let unixTimeOneDayOutMs = oneDayOutDate * 1000;
+    let unixOneDayOutDate = new Date(unixTimeOneDayOutMs);
+    let oneDayOutDateFormatted = new Intl.DateTimeFormat('en-US').format(unixOneDayOutDate);
+    oneDayOutCityDate.textContent = oneDayOutDateFormatted;
+
+    // displays date two days out
+    let twoDaysOutCityDate = document.getElementById('two-days-out-date');
+    let unixTimeTwoDaysOutMs = twoDaysOutDate * 1000;
+    let unixTwoDaysOutDate = new Date(unixTimeTwoDaysOutMs);
+    let twoDaysOutDateFormatted = new Intl.DateTimeFormat('en-US').format(unixTwoDaysOutDate);
+    twoDaysOutCityDate.textContent = twoDaysOutDateFormatted;
+
+    // displays date three days out
+    let threeDaysOutCityDate = document.getElementById('three-days-out-date');
+    let unixTimeThreeDaysOutMs = threeDaysOutDate * 1000;
+    let unixThreeDaysOutDate = new Date(unixTimeThreeDaysOutMs);
+    let threeDaysOutDateFormatted = new Intl.DateTimeFormat('en-US').format(unixThreeDaysOutDate);
+    threeDaysOutCityDate.textContent = threeDaysOutDateFormatted;
+
+    // displays date four days out
+    let fourDaysOutCityDate = document.getElementById('four-days-out-date');
+    let unixTimeFourDaysOutMs = fourDaysOutDate * 1000;
+    let unixFourDaysOutDate = new Date(unixTimeFourDaysOutMs);
+    let fourDaysOutDateFormatted = new Intl.DateTimeFormat('en-US').format(unixFourDaysOutDate);
+    fourDaysOutCityDate.textContent = fourDaysOutDateFormatted;
+
+    // displays date five days out
+    let fiveDaysOutCityDate = document.getElementById('five-days-out-date');
+    let unixTimeFiveDaysOutMs = fiveDaysOutDate * 1000;
+    let unixFiveDaysOutDate = new Date(unixTimeFiveDaysOutMs);
+    let fiveDaysOutDateFormatted = new Intl.DateTimeFormat('en-US').format(unixFiveDaysOutDate);
+    fiveDaysOutCityDate.textContent = fiveDaysOutDateFormatted;
+}
+
+function displayingFutureIcons (oneDayOutIcon){
+    document.getElementById('one-day-out-icon').src="https://openweathermap.org/img/w/"+ oneDayOutIcon +".png"; 
+    oneDayOutIcon.textContent = oneDayOutIcon;
+    
+}
 
 // WHEN I click on a city in the search history
 // THEN I am again presented with current and future conditions for that city

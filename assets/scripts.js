@@ -151,7 +151,7 @@ function getFiveDayWeather(lat, lon) {
             return response.json();
     })
     .then(function (data) {
-        // pull dates for the next five days
+        // pulls dates for the next five days
         oneDayOutDate = data.list[4].dt;
         twoDaysOutDate = data.list[10].dt;
         threeDaysOutDate = data.list[18].dt;
@@ -159,13 +159,22 @@ function getFiveDayWeather(lat, lon) {
         fiveDaysOutDate = data.list[34].dt;
         displayFutureDates(oneDayOutDate, twoDaysOutDate, threeDaysOutDate, fourDaysOutDate, fiveDaysOutDate);
 
-        // pull icons for the next five days
+        // pulls icons for the next five days
         oneDayOutIcon = data.list[4].weather[0].icon;
         twoDaysOutIcon = data.list[10].weather[0].icon;
         threeDaysOutIcon = data.list[18].weather[0].icon;
         fourDaysOutIcon = data.list[26].weather[0].icon;
         fiveDaysOutIcon = data.list[34].weather[0].icon;
-        displayingFutureIcons (oneDayOutIcon, twoDaysOutIcon, threeDaysOutIcon, fourDaysOutIcon, fiveDaysOutIcon)
+        displayingFutureIcons (oneDayOutIcon, twoDaysOutIcon, threeDaysOutIcon, fourDaysOutIcon, fiveDaysOutIcon);
+
+        // pulls temperature for the next five days
+        oneDayOutTemp = (data.list[4].main.temp).toFixed() + ' °F';
+        twoDaysOutTemp = (data.list[10].main.temp).toFixed() + ' °F';
+        threeDaysOutTemp = (data.list[18].main.temp).toFixed() + ' °F';
+        fourDaysOutTemp = (data.list[26].main.temp).toFixed() + ' °F';
+        fiveDaysOutTemp = (data.list[34].main.temp).toFixed() + ' °F';
+        
+        displayFutureTemps(oneDayOutTemp, twoDaysOutTemp, threeDaysOutTemp, fourDaysOutTemp, fiveDaysOutTemp);
     })
 }
 
@@ -221,6 +230,24 @@ function displayingFutureIcons (oneDayOutIcon, twoDaysOutIcon, threeDaysOutIcon,
 
     document.getElementById('five-days-out-icon').src="https://openweathermap.org/img/w/"+ fiveDaysOutIcon +".png";
     fiveDaysOutIcon.textContent =threeDaysOutIcon;
+}
+
+function displayFutureTemps(oneDayOutTemp, twoDaysOutTemp, threeDaysOutTemp, fourDaysOutTemp, fiveDaysOutTemp) {
+    
+    oneDayOutTempDisplayed = document.getElementById('one-day-out-temp');
+    oneDayOutTempDisplayed.textContent = oneDayOutTemp;
+    
+    twoDaysOutTempDisplayed = document.getElementById('two-days-out-temp');
+    twoDaysOutTempDisplayed.textContent = twoDaysOutTemp;
+
+    threeDaysOutTempDisplayed = document.getElementById('three-days-out-temp');
+    threeDaysOutTempDisplayed.textContent = threeDaysOutTemp;
+
+    fourDaysOutTempDisplayed = document.getElementById('four-days-out-temp');
+    fourDaysOutTempDisplayed.textContent = fourDaysOutTemp;
+
+    fiveDaysOutTempDisplayed = document.getElementById('five-days-out-temp');
+    fiveDaysOutTempDisplayed.textContent = fiveDaysOutTemp;
 }
 // WHEN I click on a city in the search history
 // THEN I am again presented with current and future conditions for that city

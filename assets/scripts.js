@@ -152,42 +152,42 @@ function getFiveDayWeather(lat, lon) {
     .then(function (data) {
         // pulls dates for the next five days
         oneDayOutDate = data.list[4].dt;
-        twoDaysOutDate = data.list[10].dt;
-        threeDaysOutDate = data.list[18].dt;
-        fourDaysOutDate = data.list[26].dt;
-        fiveDaysOutDate = data.list[34].dt;
+        twoDaysOutDate = data.list[14].dt;
+        threeDaysOutDate = data.list[24].dt;
+        fourDaysOutDate = data.list[34].dt;
+        fiveDaysOutDate = data.list[36].dt;
         displayFutureDates(oneDayOutDate, twoDaysOutDate, threeDaysOutDate, fourDaysOutDate, fiveDaysOutDate);
 
         // pulls icons for the next five days
         oneDayOutIcon = data.list[4].weather[0].icon;
-        twoDaysOutIcon = data.list[10].weather[0].icon;
-        threeDaysOutIcon = data.list[18].weather[0].icon;
-        fourDaysOutIcon = data.list[26].weather[0].icon;
-        fiveDaysOutIcon = data.list[34].weather[0].icon;
+        twoDaysOutIcon = data.list[14].weather[0].icon;
+        threeDaysOutIcon = data.list[24].weather[0].icon;
+        fourDaysOutIcon = data.list[34].weather[0].icon;
+        fiveDaysOutIcon = data.list[36].weather[0].icon;
         displayingFutureIcons (oneDayOutIcon, twoDaysOutIcon, threeDaysOutIcon, fourDaysOutIcon, fiveDaysOutIcon);
 
         // pulls temperature for the next five days
         oneDayOutTemp = (data.list[4].main.temp).toFixed() + ' °F';
-        twoDaysOutTemp = (data.list[10].main.temp).toFixed() + ' °F';
-        threeDaysOutTemp = (data.list[18].main.temp).toFixed() + ' °F';
-        fourDaysOutTemp = (data.list[26].main.temp).toFixed() + ' °F';
-        fiveDaysOutTemp = (data.list[34].main.temp).toFixed() + ' °F';
+        twoDaysOutTemp = (data.list[14].main.temp).toFixed() + ' °F';
+        threeDaysOutTemp = (data.list[24].main.temp).toFixed() + ' °F';
+        fourDaysOutTemp = (data.list[34].main.temp).toFixed() + ' °F';
+        fiveDaysOutTemp = (data.list[36].main.temp).toFixed() + ' °F';
         displayFutureTemps(oneDayOutTemp, twoDaysOutTemp, threeDaysOutTemp, fourDaysOutTemp, fiveDaysOutTemp);
 
         // pulls wind speed for the next five days
         oneDayOutWindSpeed = (data.list[4].wind.speed) + ' mph';
-        twoDaysOutWindSpeed = (data.list[4].wind.speed) + ' mph';
-        threeDaysOutWindSpeed = (data.list[4].wind.speed) + ' mph';
-        fourDaysOutWindSpeed = (data.list[4].wind.speed) + ' mph';
-        fiveDaysOutWindSpeed = (data.list[4].wind.speed) + ' mph';
+        twoDaysOutWindSpeed = (data.list[14].wind.speed) + ' mph';
+        threeDaysOutWindSpeed = (data.list[24].wind.speed) + ' mph';
+        fourDaysOutWindSpeed = (data.list[34].wind.speed) + ' mph';
+        fiveDaysOutWindSpeed = (data.list[36].wind.speed) + ' mph';
         displayFutureWindSpeed (oneDayOutWindSpeed, twoDaysOutWindSpeed, threeDaysOutWindSpeed, fourDaysOutWindSpeed, fiveDaysOutWindSpeed);
 
         // pulls humidity for the next five days
         oneDayHumidity = data.list[4].main.humidity;
-        twoDaysHumidity = data.list[10].main.humidity;
-        threeDaysHumidity = data.list[18].main.humidity;
-        fourDaysHumidity = data.list[26].main.humidity;
-        fiveDaysHumidity = data.list[34].main.humidity;
+        twoDaysHumidity = data.list[14].main.humidity;
+        threeDaysHumidity = data.list[24].main.humidity;
+        fourDaysHumidity = data.list[34].main.humidity;
+        fiveDaysHumidity = data.list[36].main.humidity;
         displayFutureHumidity (oneDayHumidity, twoDaysHumidity, threeDaysHumidity, fourDaysHumidity, fiveDaysHumidity);
     })
 }

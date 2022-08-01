@@ -160,8 +160,12 @@ function getFiveDayWeather(lat, lon) {
         displayFutureDates(oneDayOutDate, twoDaysOutDate, threeDaysOutDate, fourDaysOutDate, fiveDaysOutDate);
 
         // pull icons for the next five days
-        oneDayOutIcon = data.list[4].weather[0].id;
-        displayingFutureIcons (oneDayOutIcon)
+        oneDayOutIcon = data.list[4].weather[0].icon;
+        twoDaysOutIcon = data.list[10].weather[0].icon;
+        threeDaysOutIcon = data.list[18].weather[0].icon;
+        fourDaysOutIcon = data.list[26].weather[0].icon;
+        fiveDaysOutIcon = data.list[34].weather[0].icon;
+        displayingFutureIcons (oneDayOutIcon, twoDaysOutIcon, threeDaysOutIcon, fourDaysOutIcon, fiveDaysOutIcon)
     })
 }
 
@@ -202,12 +206,22 @@ function displayFutureDates(oneDayOutDate, twoDaysOutDate, threeDaysOutDate, fou
     fiveDaysOutCityDate.textContent = fiveDaysOutDateFormatted;
 }
 
-function displayingFutureIcons (oneDayOutIcon){
+function displayingFutureIcons (oneDayOutIcon, twoDaysOutIcon, threeDaysOutIcon, fourDaysOutIcon, fiveDaysOutIcon){
     document.getElementById('one-day-out-icon').src="https://openweathermap.org/img/w/"+ oneDayOutIcon +".png"; 
     oneDayOutIcon.textContent = oneDayOutIcon;
     
-}
+    document.getElementById('two-days-out-icon').src="https://openweathermap.org/img/w/"+ twoDaysOutIcon +".png";
+    twoDaysOutIcon.textContent = twoDaysOutIcon;
 
+    document.getElementById('three-days-out-icon').src="https://openweathermap.org/img/w/"+ threeDaysOutIcon +".png";
+    threeDaysOutIcon.textContent =threeDaysOutIcon;
+
+    document.getElementById('four-days-out-icon').src="https://openweathermap.org/img/w/"+ fourDaysOutIcon +".png";
+    fourDaysOutIcon.textContent =threeDaysOutIcon;
+
+    document.getElementById('five-days-out-icon').src="https://openweathermap.org/img/w/"+ fiveDaysOutIcon +".png";
+    fiveDaysOutIcon.textContent =threeDaysOutIcon;
+}
 // WHEN I click on a city in the search history
 // THEN I am again presented with current and future conditions for that city
     //add button for history

@@ -324,25 +324,58 @@ function displayFutureHumidity (oneDayHumidity, twoDaysHumidity, threeDaysHumidi
 
 
 
-function cityListPopulate (city) {
-    const searchButton = document.getElementById('search-button');
-    let recentSearches = JSON.parse(localStorage.getItem('recentSearch')) || [];
-    $('#history-container').text(city);
-    if(recentSearches.indexOf(city) ===  -1) {
-        let listItem = $('<li>');
-        let cityListButtons = $('<button>');
-        cityListButtons.addClass('title btn-large');
-        cityListButtons.text(city);
-        cityListButtons.click(function(){
-            city = $(this).text();
-            cityListPopulate();
-            getCoordinates(); //this maybe the wrong function
-        })
-        $('#history-container').append(cityListButtons)
+
+//Daynamically add the passed city on the search history
+function cityListPopulate (city){
+    console.log(city)
+    var listEl= $("<li>"+city.toUpperCase()+"</li>");
+    $(listEl).attr("data-value",city.toUpperCase());
+    $(".history-button").append(listEl);
+}
+
+// display the past search again when the list group item is clicked in search history
+function historySearch(event, city){
+    var liEl=event.target;
+    if (event.target.matches("li")){
+        city=liEl.textContent.trim();
+        getCurrentWeather(city);
+        console.log(city)
     }
+}
+
+//setting to local storage
+function pastCity(){
+    $("ul").empty();
+    recentSearches = JSON.parse(localStorage.getItem("city"));
+    if(city!==null){
+        city=JSON.parse(localStorage.getItem("city"));
+        for(i=0; i<city.length;i++){
+            addToList(city[i]);
+        }
+        city=city[i-1];
+        getCurrentWeather(city);
+    }
+}
+
+
+    // const searchButton = document.getElementById('search-button');
+    // let recentSearches = JSON.parse(localStorage.getItem('recentSearch')) || [];
+    // $('#history-container').text(city);
+    // if(recentSearches.indexOf(city) ===  -1) {
+    //     let listItem = $('<li>');
+    //     let cityListButtons = $('<button>');
+    //     cityListButtons.addClass('title btn-large');
+    //     // cityListButtons.text(city);
+    //     cityListButtons.click(function(){
+    //         city = $(this).text();
+    //         cityListPopulate();
+    //         getCoordinates(); //this maybe the wrong function
+    //     })
+    //     $('#history-container').append(cityListButtons)
+    // }
     // take the element of the history list and append list items to it
     // localStorage.setItem
-}
+
 
 // create a function to get recent searches from local storage
     // create a variable for recent searches and it will equal JSON.parse(localStorage.getItem('recentSearch'))

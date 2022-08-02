@@ -326,7 +326,7 @@ function displayFutureHumidity (oneDayHumidity, twoDaysHumidity, threeDaysHumidi
 
 function cityListPopulate (city) {
     const searchButton = document.getElementById('search-button');
-    let recentSearches = JSON.parse(localStorage.getItem('recentSearch'))
+    let recentSearches = JSON.parse(localStorage.getItem('recentSearch')) || [];
     $('#history-container').text(city);
     if(recentSearches.indexOf(city) ===  -1) {
         let listItem = $('<li>');
@@ -338,8 +338,8 @@ function cityListPopulate (city) {
             cityListPopulate();
             getCoordinates(); //this maybe the wrong function
         })
+        $('#history-container').append(cityListButtons)
     }
-    listItem.append(cityListButtons)
     // take the element of the history list and append list items to it
     // localStorage.setItem
 }

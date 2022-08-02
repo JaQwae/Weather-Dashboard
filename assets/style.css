@@ -12,19 +12,34 @@
     height: 60px;
 }
 
-
-.item1 { grid-area: menu; 
-    background-color: rgba(78, 140, 247, 0.229);
-}
-.item2 { grid-area: main; }
-.item3 { grid-area: right; }
-.item4 { grid-area: footer; }
-
 .grid-container {
     display: grid;
     grid-template-areas:
         'menu main main main right right'
         'menu footer footer footer footer footer';
-    gap: 10px;
     padding: 10px;
+}
+
+.item1 { 
+    grid-area: menu; 
+    background-color: rgba(78, 140, 247, 0.229);
+}
+.item2 {
+    grid-area: main;
+    background-color: rgba(255, 228, 196, 0.623);
+}
+.item3 { 
+    grid-area: right;
+    background-color: rgba(255, 228, 196, 0.623);
+}
+.item4 { 
+    grid-area: footer;
+}
+
+
+
+.five-day-display{
+    display: flex;
+    background-image: radial-gradient(rgba(255, 228, 196, 0.623),rgba(78, 140, 247, 0.229));
+
 }

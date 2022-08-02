@@ -1,3 +1,8 @@
+
+
+
+
+
 // AS A traveler
 // I WANT to see the weather outlook for multiple cities
 // SO THAT I can plan a trip accordingly
@@ -13,6 +18,7 @@ function handlingUserInput() {
     let city = document.getElementById("userInput").value;
     getCoordinates(city);
     displayName(city);
+    cityListPopulate(city);
 }
 
 
@@ -274,20 +280,20 @@ function displayFutureTemps(oneDayOutTemp, twoDaysOutTemp, threeDaysOutTemp, fou
     fiveDaysOutTempDisplayed.textContent = 'Temp: ' + fiveDaysOutTemp;
 }
 
-function displayFutureWindSpeed (oneDayOutWindSpeed, twoDaysOutWindSpeed, threeDaysOutWindSpeed, fourDaysOutWindSpeed, fiveDaysOutOutWindSpeed){
+function displayFutureWindSpeed (oneDayOutWindSpeed, twoDaysOutWindSpeed, threeDaysOutWindSpeed, fourDaysOutWindSpeed, fiveDaysOutWindSpeed){
     oneDayWindSpeedDisplayed = document.getElementById('one-day-out-wind');
     oneDayWindSpeedDisplayed.textContent = 'Wind Speed: ' + oneDayOutWindSpeed;
 
-    twoDaysWindSpeedDisplayed = document.getElementById('two-day-out-wind');
+    twoDaysWindSpeedDisplayed = document.getElementById('two-days-out-wind');
     twoDaysWindSpeedDisplayed.textContent = 'Wind Speed: ' + twoDaysOutWindSpeed;
 
-    threeDaysWindSpeedDisplayed = document.getElementById('three-day-out-wind');
+    threeDaysWindSpeedDisplayed = document.getElementById('three-days-out-wind');
     threeDaysWindSpeedDisplayed.textContent = 'Wind Speed: ' + threeDaysOutWindSpeed;
 
-    fourDaysWindSpeedDisplayed = document.getElementById('four-day-out-wind');
+    fourDaysWindSpeedDisplayed = document.getElementById('four-days-out-wind');
     fourDaysWindSpeedDisplayed.textContent = 'Wind Speed: ' + fourDaysOutWindSpeed;
 
-    fiveDaysWindSpeedDisplayed = document.getElementById('five-day-out-wind');
+    fiveDaysWindSpeedDisplayed = document.getElementById('five-days-out-wind');
     fiveDaysWindSpeedDisplayed.textContent = 'Wind Speed: ' + fiveDaysOutWindSpeed;
 }
 
@@ -315,10 +321,35 @@ function displayFutureHumidity (oneDayHumidity, twoDaysHumidity, threeDaysHumidi
 
 // WHEN I click on a city in the search history
 // THEN I am again presented with current and future conditions for that city
-    //add button for history
-    // history buttons take input from search 
-    // add event lister on search buttons
-    // make an if statement on if the value is from the search or the local 
-    // Once click how would I go about directing it to search
-        // link to search button
-        // value pairs like local storage
+
+
+
+function cityListPopulate (city) {
+    const searchButton = document.getElementById('search-button');
+    let recentSearches = JSON.parse(localStorage.getItem('recentSearch'))
+    $('#history-container').text(city);
+    if(recentSearches.indexOf(city) ===  -1) {
+        let listItem = $('<li>');
+        let cityListButtons = $('<button>');
+        cityListButtons.addClass('title btn-large');
+        cityListButtons.text(city);
+        cityListButtons.click(function(){
+            city = $(this).text();
+            cityListPopulate();
+            getCoordinates(); //this maybe the wrong function
+        })
+    }
+    listItem.append(cityListButtons)
+    // take the element of the history list and append list items to it
+    // localStorage.setItem
+}
+
+// create a function to get recent searches from local storage
+    // create a variable for recent searches and it will equal JSON.parse(localStorage.getItem('recentSearch'))
+        // recent searches will be an array
+        // recentSearches.push(recentSearches[i])
+        // if statement inside the for loop that checks if the array does not have the city name in it 
+            // if variable name.indexOf === -1 (does not contain city name)
+                // kif it is empty it will do the same 
+    // for loop to loop over the stored recent searches
+    // have a list of button that will append themselves to the history section

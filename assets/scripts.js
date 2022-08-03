@@ -337,6 +337,7 @@ function cityListPopulate (city){
         city = $(this).text();
         cityListPopulate();
         getCoordinates(city);
+        displayName(city);
         getCurrentWeather();
         })
     }

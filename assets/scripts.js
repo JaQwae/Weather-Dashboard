@@ -331,10 +331,12 @@ for (let i = 0; i < recentSearchButtons.length; i++) {
     cityListPopulate(recentSearchButtons[i]); 
 }
 
-recentSearches = []
+
 //Dynamically add the passed city on the search history
 function cityListPopulate (city){
-    // if(recentSearches.indexOf(city) ===  -1) {
+    if(recentSearchButtons.indexOf(city) ===  -1) {
+        return;
+    }else {
         var cityButtons = $("<button>")//+city//.toUpperCase()+"</button>");
         cityButtons.text(city);
         // $(cityButtons).attr("data-value",city.toUpperCase());
@@ -347,17 +349,17 @@ function cityListPopulate (city){
         displayName(city);
         getCurrentWeather();
         })
-}
-
-// display the past search again when the list group item is clicked in search history
-function historySearch(event, city){
-    var liEl=event.target;
-    if (event.target.matches("button")){
-        city=liEl.textContent.trim();
-        getCurrentWeather(city);
-        console.log(city)
     }
 }
+// // display the past search again when the list group item is clicked in search history
+// function historySearch(event, city){
+//     var liEl=event.target;
+//     if (event.target.matches("button")){
+//         city=liEl.textContent.trim();
+//         getCurrentWeather(city);
+//         console.log(city)
+//     }
+// }
 
 
 //setting to local storage ??

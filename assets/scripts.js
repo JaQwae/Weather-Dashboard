@@ -163,7 +163,7 @@ function getFiveDayWeather(lat, lon) {
         oneDayOutDate = data.list[4].dt;
         twoDaysOutDate = data.list[14].dt;
         threeDaysOutDate = data.list[24].dt;
-        fourDaysOutDate = data.list[34].dt;
+        fourDaysOutDate = data.list[29].dt;
         fiveDaysOutDate = data.list[36].dt;
         displayFutureDates(oneDayOutDate, twoDaysOutDate, threeDaysOutDate, fourDaysOutDate, fiveDaysOutDate);
 
@@ -171,7 +171,7 @@ function getFiveDayWeather(lat, lon) {
         oneDayOutIcon = data.list[4].weather[0].icon;
         twoDaysOutIcon = data.list[14].weather[0].icon;
         threeDaysOutIcon = data.list[24].weather[0].icon;
-        fourDaysOutIcon = data.list[34].weather[0].icon;
+        fourDaysOutIcon = data.list[29].weather[0].icon;
         fiveDaysOutIcon = data.list[36].weather[0].icon;
         displayingFutureIcons (oneDayOutIcon, twoDaysOutIcon, threeDaysOutIcon, fourDaysOutIcon, fiveDaysOutIcon);
 
@@ -179,7 +179,7 @@ function getFiveDayWeather(lat, lon) {
         oneDayOutTemp = (data.list[4].main.temp).toFixed() + ' °F';
         twoDaysOutTemp = (data.list[14].main.temp).toFixed() + ' °F';
         threeDaysOutTemp = (data.list[24].main.temp).toFixed() + ' °F';
-        fourDaysOutTemp = (data.list[34].main.temp).toFixed() + ' °F';
+        fourDaysOutTemp = (data.list[29].main.temp).toFixed() + ' °F';
         fiveDaysOutTemp = (data.list[36].main.temp).toFixed() + ' °F';
         displayFutureTemps(oneDayOutTemp, twoDaysOutTemp, threeDaysOutTemp, fourDaysOutTemp, fiveDaysOutTemp);
 
@@ -187,7 +187,7 @@ function getFiveDayWeather(lat, lon) {
         oneDayOutWindSpeed = (data.list[4].wind.speed) + ' mph';
         twoDaysOutWindSpeed = (data.list[14].wind.speed) + ' mph';
         threeDaysOutWindSpeed = (data.list[24].wind.speed) + ' mph';
-        fourDaysOutWindSpeed = (data.list[34].wind.speed) + ' mph';
+        fourDaysOutWindSpeed = (data.list[29].wind.speed) + ' mph';
         fiveDaysOutWindSpeed = (data.list[36].wind.speed) + ' mph';
         displayFutureWindSpeed (oneDayOutWindSpeed, twoDaysOutWindSpeed, threeDaysOutWindSpeed, fourDaysOutWindSpeed, fiveDaysOutWindSpeed);
 
@@ -195,7 +195,7 @@ function getFiveDayWeather(lat, lon) {
         oneDayHumidity = data.list[4].main.humidity;
         twoDaysHumidity = data.list[14].main.humidity;
         threeDaysHumidity = data.list[24].main.humidity;
-        fourDaysHumidity = data.list[34].main.humidity;
+        fourDaysHumidity = data.list[29].main.humidity;
         fiveDaysHumidity = data.list[36].main.humidity;
         displayFutureHumidity (oneDayHumidity, twoDaysHumidity, threeDaysHumidity, fourDaysHumidity, fiveDaysHumidity);
     })

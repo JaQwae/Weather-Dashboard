@@ -324,26 +324,36 @@ function displayFutureHumidity (oneDayHumidity, twoDaysHumidity, threeDaysHumidi
 
 
 
-
-//Daynamically add the passed city on the search history
+recentSearches = []
+//Dynamically add the passed city on the search history
 function cityListPopulate (city){
-    console.log(city)
-    var listEl= $("<li>"+city.toUpperCase()+"</li>");
-    $(listEl).attr("data-value",city.toUpperCase());
-    $(".history-button").append(listEl);
+    if(recentSearches.indexOf(city) ===  -1) {
+        var cityButtons = $("<button>")//+city//.toUpperCase()+"</button>");
+        cityButtons.text(city);
+        // $(cityButtons).attr("data-value",city.toUpperCase());
+        $(cityButtons).addClass('title btn-large')
+        $("#history-container").append(cityButtons);
+        cityButtons.click(function(){
+        city = $(this).text();
+        cityListPopulate();
+        getCoordinates(city);
+        getCurrentWeather();
+        })
+    }
 }
 
 // display the past search again when the list group item is clicked in search history
 function historySearch(event, city){
     var liEl=event.target;
-    if (event.target.matches("li")){
+    if (event.target.matches("button")){
         city=liEl.textContent.trim();
         getCurrentWeather(city);
         console.log(city)
     }
 }
 
-//setting to local storage
+
+//setting to local storage ??
 function pastCity(){
     $("ul").empty();
     recentSearches = JSON.parse(localStorage.getItem("city"));
@@ -356,6 +366,10 @@ function pastCity(){
         getCurrentWeather(city);
     }
 }
+
+
+
+// 
 
 
     // const searchButton = document.getElementById('search-button');

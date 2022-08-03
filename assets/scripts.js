@@ -339,7 +339,6 @@ function cityListPopulate (city){
     }else {
         var cityButtons = $("<button>")//+city//.toUpperCase()+"</button>");
         cityButtons.text(city);
-        // $(cityButtons).attr("data-value",city.toUpperCase());
         $(cityButtons).addClass('title btn-large')
         $("#history-container").append(cityButtons);
         cityButtons.click(function(){
@@ -347,65 +346,6 @@ function cityListPopulate (city){
         cityListPopulate();
         getCoordinates(city);
         displayName(city);
-        getCurrentWeather();
         })
     }
 }
-// // display the past search again when the list group item is clicked in search history
-// function historySearch(event, city){
-//     var liEl=event.target;
-//     if (event.target.matches("button")){
-//         city=liEl.textContent.trim();
-//         getCurrentWeather(city);
-//         console.log(city)
-//     }
-// }
-
-
-//setting to local storage ??
-// function pastCity(){
-//     $("ul").empty();
-//     recentSearches = JSON.parse(localStorage.getItem("city"));
-//     if(city!==null){
-//         city=JSON.parse(localStorage.getItem("city"));
-//         for(i=0; i<city.length;i++){
-//             addToList(city[i]);
-//         }
-//         city=city[i-1];
-//         getCurrentWeather(city);
-//     }
-// }
-
-
-
-// 
-
-
-    // const searchButton = document.getElementById('search-button');
-    // let recentSearches = JSON.parse(localStorage.getItem('recentSearch')) || [];
-    // $('#history-container').text(city);
-    // if(recentSearches.indexOf(city) ===  -1) {
-    //     let listItem = $('<li>');
-    //     let cityListButtons = $('<button>');
-    //     cityListButtons.addClass('title btn-large');
-    //     // cityListButtons.text(city);
-    //     cityListButtons.click(function(){
-    //         city = $(this).text();
-    //         cityListPopulate();
-    //         getCoordinates(); //this maybe the wrong function
-    //     })
-    //     $('#history-container').append(cityListButtons)
-    // }
-    // take the element of the history list and append list items to it
-    // localStorage.setItem
-
-
-// create a function to get recent searches from local storage
-    // create a variable for recent searches and it will equal JSON.parse(localStorage.getItem('recentSearch'))
-        // recent searches will be an array
-        // recentSearches.push(recentSearches[i])
-        // if statement inside the for loop that checks if the array does not have the city name in it 
-            // if variable name.indexOf === -1 (does not contain city name)
-                // kif it is empty it will do the same 
-    // for loop to loop over the stored recent searches
-    // have a list of button that will append themselves to the history section

@@ -19,6 +19,9 @@ function handlingUserInput() {
     getCoordinates(city);
     displayName(city);
     cityListPopulate(city);
+    var searchHistory = JSON.parse(localStorage.getItem("city")) || []
+    searchHistory.push(city)
+    localStorage.setItem("city", JSON.stringify(searchHistory)) 
 }
 
 
@@ -323,11 +326,15 @@ function displayFutureHumidity (oneDayHumidity, twoDaysHumidity, threeDaysHumidi
 // THEN I am again presented with current and future conditions for that city
 
 
+var recentSearchButtons = JSON.parse(localStorage.getItem("city")) || []
+for (let i = 0; i < recentSearchButtons.length; i++) {
+    cityListPopulate(recentSearchButtons[i]); 
+}
 
 recentSearches = []
 //Dynamically add the passed city on the search history
 function cityListPopulate (city){
-    if(recentSearches.indexOf(city) ===  -1) {
+    // if(recentSearches.indexOf(city) ===  -1) {
         var cityButtons = $("<button>")//+city//.toUpperCase()+"</button>");
         cityButtons.text(city);
         // $(cityButtons).attr("data-value",city.toUpperCase());
@@ -340,7 +347,6 @@ function cityListPopulate (city){
         displayName(city);
         getCurrentWeather();
         })
-    }
 }
 
 // display the past search again when the list group item is clicked in search history
@@ -355,18 +361,18 @@ function historySearch(event, city){
 
 
 //setting to local storage ??
-function pastCity(){
-    $("ul").empty();
-    recentSearches = JSON.parse(localStorage.getItem("city"));
-    if(city!==null){
-        city=JSON.parse(localStorage.getItem("city"));
-        for(i=0; i<city.length;i++){
-            addToList(city[i]);
-        }
-        city=city[i-1];
-        getCurrentWeather(city);
-    }
-}
+// function pastCity(){
+//     $("ul").empty();
+//     recentSearches = JSON.parse(localStorage.getItem("city"));
+//     if(city!==null){
+//         city=JSON.parse(localStorage.getItem("city"));
+//         for(i=0; i<city.length;i++){
+//             addToList(city[i]);
+//         }
+//         city=city[i-1];
+//         getCurrentWeather(city);
+//     }
+// }
 
 
 

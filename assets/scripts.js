@@ -27,7 +27,7 @@ function handlingUserInput() {
 
 // gets lon and lat values
 function getCoordinates(city) {
-    let requestUrl = 'http://api.openweathermap.org/geo/1.0/direct?q='+ city +'&limit=5&appid=9fa809658341d19670907599fff8fcdc';
+    let requestUrl = 'https://api.openweathermap.org/geo/1.0/direct?q='+ city +'&limit=5&appid=9fa809658341d19670907599fff8fcdc';
 
     fetch(requestUrl)
     .then(function (response) {
@@ -46,7 +46,7 @@ function getCoordinates(city) {
 
 //Weather API 
 function getCurrentWeather(lat, lon) {
-    let requestUrl = 'https://api.openweathermap.org/data/2.5/onecall?lat='+ lat +'&lon='+ lon +'&units=imperial&appid=9fa809658341d19670907599fff8fcdc';
+    let requestUrl = 'httpss://api.openweathermap.org/data/2.5/onecall?lat='+ lat +'&lon='+ lon +'&units=imperial&appid=9fa809658341d19670907599fff8fcdc';
 
     fetch(requestUrl)
         .then(function (response) {
@@ -99,7 +99,7 @@ function displayCurrentDate(currentDate){
 
 //display weather icon
 function displayingCurrentIcon (){
-    document.getElementById('current-weather-icon').src="http://openweathermap.org/img/w/"+ currentIcon +".png"; 
+    document.getElementById('current-weather-icon').src="https://openweathermap.org/img/w/"+ currentIcon +".png"; 
     currentIcon.textContent = currentIcon;
 }
 
@@ -152,7 +152,7 @@ function uvIndicator (uvValue) {
 // WHEN I view future weather conditions for that city
 // THEN I am presented with a 5-day forecast that displays the date, an icon representation of weather conditions, the temperature, the wind speed, and the humidity
 function getFiveDayWeather(lat, lon) {
-    let requestUrl = 'https://api.openweathermap.org/data/2.5/forecast?lat='+ lat +'&lon='+ lon +'&units=imperial&appid=9fa809658341d19670907599fff8fcdc';
+    let requestUrl = 'httpss://api.openweathermap.org/data/2.5/forecast?lat='+ lat +'&lon='+ lon +'&units=imperial&appid=9fa809658341d19670907599fff8fcdc';
 
     fetch(requestUrl)
         .then(function (response) {
@@ -240,23 +240,23 @@ function displayFutureDates(oneDayOutDate, twoDaysOutDate, threeDaysOutDate, fou
 
 function displayingFutureIcons (oneDayOutIcon, twoDaysOutIcon, threeDaysOutIcon, fourDaysOutIcon, fiveDaysOutIcon){
     // display next day weather icon
-    document.getElementById('one-day-out-icon').src="https://openweathermap.org/img/w/"+ oneDayOutIcon +".png"; 
+    document.getElementById('one-day-out-icon').src="httpss://openweathermap.org/img/w/"+ oneDayOutIcon +".png"; 
     oneDayOutIcon.textContent = oneDayOutIcon;
     
     // display weather icon two days out
-    document.getElementById('two-days-out-icon').src="https://openweathermap.org/img/w/"+ twoDaysOutIcon +".png";
+    document.getElementById('two-days-out-icon').src="httpss://openweathermap.org/img/w/"+ twoDaysOutIcon +".png";
     twoDaysOutIcon.textContent = twoDaysOutIcon;
 
     // display weather icon three days out
-    document.getElementById('three-days-out-icon').src="https://openweathermap.org/img/w/"+ threeDaysOutIcon +".png";
+    document.getElementById('three-days-out-icon').src="httpss://openweathermap.org/img/w/"+ threeDaysOutIcon +".png";
     threeDaysOutIcon.textContent =threeDaysOutIcon;
 
     // display weather icon four days out
-    document.getElementById('four-days-out-icon').src="https://openweathermap.org/img/w/"+ fourDaysOutIcon +".png";
+    document.getElementById('four-days-out-icon').src="httpss://openweathermap.org/img/w/"+ fourDaysOutIcon +".png";
     fourDaysOutIcon.textContent = fourDaysOutIcon;
 
     // display weather icon five days out
-    document.getElementById('five-days-out-icon').src="https://openweathermap.org/img/w/"+ fiveDaysOutIcon +".png";
+    document.getElementById('five-days-out-icon').src="httpss://openweathermap.org/img/w/"+ fiveDaysOutIcon +".png";
     fiveDaysOutIcon.textContent = fiveDaysOutIcon;
     
 }

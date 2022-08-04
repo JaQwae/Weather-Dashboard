@@ -5,7 +5,7 @@
 
 This project is for the user that is a frequent traveler or weather enthuses. The purpose for the program is to allow a user to check the weather in a place of their choosing. 
 
- [Deployed link]()
+ [Deployed link](https://jaqwae.github.io/weatherDashboard/)
 
 ## Features
 
@@ -29,11 +29,10 @@ What's to come:
 - Current weather will display the high and low temp for the current day.
 -  All forecast temps will be set to the high of the day an not just the temp at a certain time
 
-  
+
 
 ## Images
 ![weather dashboard displaying weather for Austin](./images/weatherDashBoardScreenBefore.png);
-  
 
 ## Credits
 

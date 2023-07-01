@@ -87,10 +87,8 @@ function cityNameFormatting(city) {
 
 function displayName(city){
     let cityNameFormatted = cityNameFormatting(city);
-    city = cityNameFormatted;
-    
     let cityName = document.getElementById('city-name');
-    cityName.textContent = city;
+    cityName.textContent = cityNameFormatted;
 }
 
 //displays current date in MM/DD/YY format

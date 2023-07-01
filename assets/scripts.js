@@ -1,31 +1,13 @@
-
-
-
-
-
-// AS A traveler
-// I WANT to see the weather outlook for multiple cities
-// SO THAT I can plan a trip accordingly
-
-// GIVEN a weather dashboard with form inputs
-// WHEN I search for a city
-// THEN I am presented with current and future conditions for that city and that city is added to the search history
+//------Global variables-------
+    //Placeholder for latitude and longitude value;
+    let lat = 0;
+    let lon = 0;
+// ----------------------------
 
 const searchButton = document.getElementById('search-button');
 searchButton.addEventListener('click', handlingUserInput );
 
-function handlingUserInput() {
-    let city = document.getElementById("userInput").value;
-    getCoordinates(city);
-    displayName(city);
-    cityListPopulate(city);
-    var searchHistory = JSON.parse(localStorage.getItem("city")) || []
-    searchHistory.push(city)
-    localStorage.setItem("city", JSON.stringify(searchHistory)) 
-}
-
-
-// gets lon and lat values
+// Updates lon and lat values
 function getCoordinates(city) {
     let requestUrl = 'https://api.openweathermap.org/geo/1.0/direct?q='+ city +'&limit=5&appid=9fa809658341d19670907599fff8fcdc';
 
@@ -34,17 +16,12 @@ function getCoordinates(city) {
         return response.json();
     })
     .then(function (data) {
-        let lat = data[0].lat;
-        let lon = data[0].lon;
-        
-        getCurrentWeather(lat, lon);
-        getFiveDayWeather(lat, lon)
+        lat = data[0].lat;
+        lon = data[0].lon;
     });
 }
 
-
-
-//Weather API 
+//Retrieves the current location's weather information 
 function getCurrentWeather(lat, lon) {
     let requestUrl = 'https://api.openweathermap.org/data/2.5/onecall?lat='+ lat +'&lon='+ lon +'&units=imperial&appid=9fa809658341d19670907599fff8fcdc';
 
@@ -54,31 +31,48 @@ function getCurrentWeather(lat, lon) {
     })
     .then(function (data) {
         // grabs unix time
-        currentDate = data.current.dt;
+        let currentDate = data.current.dt;
         displayCurrentDate(currentDate);
 
         //grabs icon
-        currentIcon = data.current.weather[0].icon;
+        let currentIcon = data.current.weather[0].icon;
         displayingCurrentIcon(currentIcon);
 
         // grabs temp
-        currentTemp = data.current.temp;
+        let currentTemp = data.current.temp;
         currentTempDisplay(currentTemp);
 
         // grabs humidity
-        currentHumidityValue = data.current.humidity;
+        let currentHumidityValue = data.current.humidity;
         currentHumidityDisplay(currentHumidityValue);
 
         //grab current wind speed
-        currentWindSpeed = data.current.wind_speed;
+        let currentWindSpeed = data.current.wind_speed;
         displayCurrentWindSpeed(currentWindSpeed);
         
         // grabs current UV value
-        uvValue = data.current.uvi;
+        let uvValue = data.current.uvi;
         displayUvIndex (uvValue);
         uvIndicator (uvValue);
     })
 }
+
+function handlingUserInput() {
+    let city = document.getElementById("userInput").value;
+    getCoordinates(city);
+    displayName(city);
+    getCurrentWeather(lat, lon);
+    getFiveDayWeather(lat, lon);
+    cityListPopulate(city);
+
+    //Save the search location for future use
+    // let searchHistory = JSON.parse(localStorage.getItem("city")) || []
+    // searchHistory.push(city)
+    // localStorage.setItem("city", JSON.stringify(searchHistory)) 
+}
+
+
+
 // WHEN I view current weather conditions for that city
 // THEN I am presented with the city name, the date, an icon representation of weather conditions, the temperature, the humidity, the wind speed, and the UV index
 

@@ -59,11 +59,11 @@ function getCurrentWeather(lat, lon) {
 
 function handlingUserInput() {
     let city = document.getElementById("userInput").value;
-    getCoordinates(city);
+    // getCoordinates(city);
     displayName(city);
-    getCurrentWeather(lat, lon);
-    getFiveDayWeather(lat, lon);
-    cityListPopulate(city);
+    // getCurrentWeather(lat, lon);
+    // getFiveDayWeather(lat, lon);
+    // cityListPopulate(city);
 
     //Save the search location for future use
     // let searchHistory = JSON.parse(localStorage.getItem("city")) || []
@@ -73,11 +73,23 @@ function handlingUserInput() {
 
 
 
-// WHEN I view current weather conditions for that city
-// THEN I am presented with the city name, the date, an icon representation of weather conditions, the temperature, the humidity, the wind speed, and the UV index
+//Provides correct capitalization of city's name
+function cityNameFormatting(city) {
+    let cityNameArr = city.split(" ");
+
+    for (var i = 0; i < cityNameArr.length; i++) {
+        cityNameArr[i] = cityNameArr[i].charAt(0).toUpperCase() + cityNameArr[i].slice(1);
+    }
+
+    let cityNameFormatted = cityNameArr.join(" ");
+    return cityNameFormatted;
+}
 
 function displayName(city){
-    let cityName = document.getElementById('city-name')    
+    let cityNameFormatted = cityNameFormatting(city);
+    city = cityNameFormatted;
+    
+    let cityName = document.getElementById('city-name');
     cityName.textContent = city;
 }
 

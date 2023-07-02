@@ -4,8 +4,8 @@
     let lon = 0;
 // ----------------------------
 
-const searchButton = document.getElementById('search-button');
-searchButton.addEventListener('click', handlingUserInput );
+// const searchButton = document.getElementById('search-button');
+// searchButton.addEventListener('click', handlingUserInput );
 
 // Updates lon and lat values
 function getCoordinates(city) {
@@ -21,58 +21,6 @@ function getCoordinates(city) {
     });
 }
 
-//Retrieves the current location's weather information 
-function getCurrentWeather(lat, lon) {
-    let requestUrl = 'https://api.openweathermap.org/data/2.5/onecall?lat='+ lat +'&lon='+ lon +'&units=imperial&appid=9fa809658341d19670907599fff8fcdc';
-
-    fetch(requestUrl)
-        .then(function (response) {
-            return response.json();
-    })
-    .then(function (data) {
-        // grabs unix time
-        let currentDate = data.current.dt;
-        displayCurrentDate(currentDate);
-
-        //grabs icon
-        let currentIcon = data.current.weather[0].icon;
-        displayingCurrentIcon(currentIcon);
-
-        // grabs temp
-        let currentTemp = data.current.temp;
-        currentTempDisplay(currentTemp);
-
-        // grabs humidity
-        let currentHumidityValue = data.current.humidity;
-        currentHumidityDisplay(currentHumidityValue);
-
-        //grab current wind speed
-        let currentWindSpeed = data.current.wind_speed;
-        displayCurrentWindSpeed(currentWindSpeed);
-        
-        // grabs current UV value
-        let uvValue = data.current.uvi;
-        displayUvIndex (uvValue);
-        uvIndicator (uvValue);
-    })
-}
-
-function handlingUserInput() {
-    let city = document.getElementById("userInput").value;
-    // getCoordinates(city);
-    displayName(city);
-    // getCurrentWeather(lat, lon);
-    // getFiveDayWeather(lat, lon);
-    // cityListPopulate(city);
-
-    //Save the search location for future use
-    // let searchHistory = JSON.parse(localStorage.getItem("city")) || []
-    // searchHistory.push(city)
-    // localStorage.setItem("city", JSON.stringify(searchHistory)) 
-}
-
-
-
 //Provides correct capitalization of city's name
 function cityNameFormatting(city) {
     let cityNameArr = city.split(" ");
@@ -85,59 +33,59 @@ function cityNameFormatting(city) {
     return cityNameFormatted;
 }
 
+// Displays city name in the weather section
 function displayName(city){
     let cityNameFormatted = cityNameFormatting(city);
     let cityName = document.getElementById('city-name');
     cityName.textContent = cityNameFormatted;
 }
 
-//displays current date in MM/DD/YY format
-function displayCurrentDate(currentDate){
-    let currentCityDate = document.getElementById('current-date')
-    let currentUnixTimeMs = currentDate * 1000;
-    let currentUnixDate = new Date(currentUnixTimeMs);
-    let currentDateFormated = new Intl.DateTimeFormat('en-US').format(currentUnixDate);
+//Coverts time for unix to MM/DD/YY format
+function dateFormatting(date) {
+    let unixTimeMs = date * 1000;
+    let unixDate = new Date(unixTimeMs);
+    let dateFormatted = new Intl.DateTimeFormat('en-US').format(unixDate);
+    return dateFormatted;
+}
 
-    currentCityDate.textContent = currentDateFormated;
+//Displays current date
+function displayingCurrentDate(currentDate){
+    let currentCityDate = document.getElementById('current-date');
+    let currentDateFormatted = dateFormatting(currentDate);
+    currentCityDate.textContent = currentDateFormatted;
 }
 
 //display weather icon
-function displayingCurrentIcon (){
+function displayingCurrentIcon (currentIcon){
     document.getElementById('current-weather-icon').src="https://openweathermap.org/img/w/"+ currentIcon +".png"; 
     currentIcon.textContent = currentIcon;
 }
 
 //displays converted temp from K to F
-let currentFTemp = document.getElementById('current-temp');
-function currentTempDisplay(currentTemp){
+function displayingCurrentTemp(currentTemp){
+    let currentFTemp = document.getElementById('current-temp');
     currentFTemp.textContent = 'Temp: ' + currentTemp.toFixed() + " °F";
 }
 
 //displays humidity value
-let currentHumidityPlaceholder = document.getElementById('current-humidity');
 function currentHumidityDisplay(currentHumidityValue) {
+    let currentHumidityPlaceholder = document.getElementById('current-humidity');
     currentHumidityFormat = 'Humidity: ' + currentHumidityValue + '%';
     currentHumidityPlaceholder.textContent = currentHumidityFormat;
 }
 
 //displays wind speed
-let currentWindSpeedPlaceholder = document.getElementById('current-wind-speed');
 function displayCurrentWindSpeed(currentWindSpeed) {
+    let currentWindSpeedPlaceholder = document.getElementById('current-wind-speed');
     currentWindSpeedPlaceholder.textContent = 'Wind speed: ' + currentWindSpeed.toFixed(2) + ' mph';
 }
 
 // displays uv value
-let uv = document.getElementById('uv-index');
 function displayUvIndex (uvValue){
+    let uv = document.getElementById('uv-index');
     uv.textContent = 'UV Index: ' + uvValue;
-}
 
-
-// WHEN I view the UV index
-// THEN I am presented with a color that indicates whether the conditions are favorable, moderate, or severe
-
-// changes color depending on if the UV is low, moderate, high, very high, or severe.
-function uvIndicator (uvValue) {
+    // changes color depending on if the UV is low, moderate, high, very high, or severe.
     if (uvValue <= 2.9) {
         uv.style.backgroundColor = 'green';
     } else if (uvValue >= 3 && uvValue <= 5.9){
@@ -149,12 +97,44 @@ function uvIndicator (uvValue) {
     } else {
         uv.style.backgroundColor = 'var(--purple-color)';
     }
-} 
+}
 
+//Retrieves the current location's weather information 
+function getCurrentWeather(lat, lon) {
+    let requestUrl = 'https://api.openweathermap.org/data/2.5/onecall?lat='+ lat +'&lon='+ lon +'&units=imperial&appid=9fa809658341d19670907599fff8fcdc';
 
+    fetch(requestUrl)
+        .then(function (response) {
+            return response.json();
+    })
+    .then(function (data) {
+        // grabs unix time
+        let currentDate = data.current.dt;
+        displayingCurrentDate(currentDate);
 
-// WHEN I view future weather conditions for that city
-// THEN I am presented with a 5-day forecast that displays the date, an icon representation of weather conditions, the temperature, the wind speed, and the humidity
+        //grabs icon
+        let currentIcon = data.current.weather[0].icon;
+        displayingCurrentIcon(currentIcon);
+
+        // grabs temp
+        let currentTemp = data.current.temp;
+        displayingCurrentTemp(currentTemp);
+
+        // grabs humidity
+        let currentHumidityValue = data.current.humidity;
+        currentHumidityDisplay(currentHumidityValue);
+
+        //grab current wind speed
+        let currentWindSpeed = data.current.wind_speed;
+        displayCurrentWindSpeed(currentWindSpeed);
+        
+        // grabs current UV value
+        let uvValue = data.current.uvi;
+        displayUvIndex (uvValue);
+    })
+}
+
+//Retrieves the weather for the next five days
 function getFiveDayWeather(lat, lon) {
     let requestUrl = 'https://api.openweathermap.org/data/2.5/forecast?lat='+ lat +'&lon='+ lon +'&units=imperial&appid=9fa809658341d19670907599fff8fcdc';
 
@@ -166,7 +146,7 @@ function getFiveDayWeather(lat, lon) {
         // pulls dates for the next five days
         oneDayOutDate = data.list[4].dt;
         twoDaysOutDate = data.list[14].dt;
-        threeDaysOutDate = data.list[24].dt;
+        threeDaysOutDate = data.list[23].dt;
         fourDaysOutDate = data.list[29].dt;
         fiveDaysOutDate = data.list[36].dt;
         displayFutureDates(oneDayOutDate, twoDaysOutDate, threeDaysOutDate, fourDaysOutDate, fiveDaysOutDate);
@@ -174,7 +154,7 @@ function getFiveDayWeather(lat, lon) {
         // pulls icons for the next five days
         oneDayOutIcon = data.list[4].weather[0].icon;
         twoDaysOutIcon = data.list[14].weather[0].icon;
-        threeDaysOutIcon = data.list[24].weather[0].icon;
+        threeDaysOutIcon = data.list[23].weather[0].icon;
         fourDaysOutIcon = data.list[29].weather[0].icon;
         fiveDaysOutIcon = data.list[36].weather[0].icon;
         displayingFutureIcons (oneDayOutIcon, twoDaysOutIcon, threeDaysOutIcon, fourDaysOutIcon, fiveDaysOutIcon);
@@ -182,7 +162,7 @@ function getFiveDayWeather(lat, lon) {
         // pulls temperature for the next five days
         oneDayOutTemp = (data.list[4].main.temp).toFixed() + ' °F';
         twoDaysOutTemp = (data.list[14].main.temp).toFixed() + ' °F';
-        threeDaysOutTemp = (data.list[24].main.temp).toFixed() + ' °F';
+        threeDaysOutTemp = (data.list[23].main.temp).toFixed() + ' °F';
         fourDaysOutTemp = (data.list[29].main.temp).toFixed() + ' °F';
         fiveDaysOutTemp = (data.list[36].main.temp).toFixed() + ' °F';
         displayFutureTemps(oneDayOutTemp, twoDaysOutTemp, threeDaysOutTemp, fourDaysOutTemp, fiveDaysOutTemp);
@@ -190,7 +170,7 @@ function getFiveDayWeather(lat, lon) {
         // pulls wind speed for the next five days
         oneDayOutWindSpeed = (data.list[4].wind.speed) + ' mph';
         twoDaysOutWindSpeed = (data.list[14].wind.speed) + ' mph';
-        threeDaysOutWindSpeed = (data.list[24].wind.speed) + ' mph';
+        threeDaysOutWindSpeed = (data.list[23].wind.speed) + ' mph';
         fourDaysOutWindSpeed = (data.list[29].wind.speed) + ' mph';
         fiveDaysOutWindSpeed = (data.list[36].wind.speed) + ' mph';
         displayFutureWindSpeed (oneDayOutWindSpeed, twoDaysOutWindSpeed, threeDaysOutWindSpeed, fourDaysOutWindSpeed, fiveDaysOutWindSpeed);
@@ -198,48 +178,35 @@ function getFiveDayWeather(lat, lon) {
         // pulls humidity for the next five days
         oneDayHumidity = data.list[4].main.humidity;
         twoDaysHumidity = data.list[14].main.humidity;
-        threeDaysHumidity = data.list[24].main.humidity;
+        threeDaysHumidity = data.list[23].main.humidity;
         fourDaysHumidity = data.list[29].main.humidity;
         fiveDaysHumidity = data.list[36].main.humidity;
         displayFutureHumidity (oneDayHumidity, twoDaysHumidity, threeDaysHumidity, fourDaysHumidity, fiveDaysHumidity);
     })
 }
 
+function handlingUserInput() {
+    let city = document.getElementById("userInput").value;
+    // getCoordinates(city);
+    displayName(city);
+    // getCurrentWeather(lat, lon);
+    getFiveDayWeather(lat, lon);
+    // cityListPopulate(city);
+
+    //Save the search location for future use
+    // let searchHistory = JSON.parse(localStorage.getItem("city")) || []
+    // searchHistory.push(city)
+    // localStorage.setItem("city", JSON.stringify(searchHistory)) 
+}
+
 function displayFutureDates(oneDayOutDate, twoDaysOutDate, threeDaysOutDate, fourDaysOutDate, fiveDaysOutDate){
-    // displays next day date
-    let oneDayOutCityDate = document.getElementById('one-day-out-date');
-    let unixTimeOneDayOutMs = oneDayOutDate * 1000;
-    let unixOneDayOutDate = new Date(unixTimeOneDayOutMs);
-    let oneDayOutDateFormatted = new Intl.DateTimeFormat('en-US').format(unixOneDayOutDate);
-    oneDayOutCityDate.textContent = oneDayOutDateFormatted;
+    let dates = [oneDayOutDate, twoDaysOutDate, threeDaysOutDate, fourDaysOutDate, fiveDaysOutDate];
 
-    // displays date two days out
-    let twoDaysOutCityDate = document.getElementById('two-days-out-date');
-    let unixTimeTwoDaysOutMs = twoDaysOutDate * 1000;
-    let unixTwoDaysOutDate = new Date(unixTimeTwoDaysOutMs);
-    let twoDaysOutDateFormatted = new Intl.DateTimeFormat('en-US').format(unixTwoDaysOutDate);
-    twoDaysOutCityDate.textContent = twoDaysOutDateFormatted;
-
-    // displays date three days out
-    let threeDaysOutCityDate = document.getElementById('three-days-out-date');
-    let unixTimeThreeDaysOutMs = threeDaysOutDate * 1000;
-    let unixThreeDaysOutDate = new Date(unixTimeThreeDaysOutMs);
-    let threeDaysOutDateFormatted = new Intl.DateTimeFormat('en-US').format(unixThreeDaysOutDate);
-    threeDaysOutCityDate.textContent = threeDaysOutDateFormatted;
-
-    // displays date four days out
-    let fourDaysOutCityDate = document.getElementById('four-days-out-date');
-    let unixTimeFourDaysOutMs = fourDaysOutDate * 1000;
-    let unixFourDaysOutDate = new Date(unixTimeFourDaysOutMs);
-    let fourDaysOutDateFormatted = new Intl.DateTimeFormat('en-US').format(unixFourDaysOutDate);
-    fourDaysOutCityDate.textContent = fourDaysOutDateFormatted;
-
-    // displays date five days out
-    let fiveDaysOutCityDate = document.getElementById('five-days-out-date');
-    let unixTimeFiveDaysOutMs = fiveDaysOutDate * 1000;
-    let unixFiveDaysOutDate = new Date(unixTimeFiveDaysOutMs);
-    let fiveDaysOutDateFormatted = new Intl.DateTimeFormat('en-US').format(unixFiveDaysOutDate);
-    fiveDaysOutCityDate.textContent = fiveDaysOutDateFormatted;
+    for (let day=0; day<dates.length; day++) {
+        let daysOut = day + 1;
+        let dateFormatted = dateFormatting(dates[day]);
+        document.getElementById(`date-out-${daysOut}-day`).textContent = dateFormatted;
+    }
 }
 
 function displayingFutureIcons (oneDayOutIcon, twoDaysOutIcon, threeDaysOutIcon, fourDaysOutIcon, fiveDaysOutIcon){
@@ -353,3 +320,6 @@ function cityListPopulate (city){
         })
     }
 }
+
+const searchButton = document.getElementById('search-button');
+searchButton.addEventListener('click', handlingUserInput );

@@ -4,9 +4,6 @@
     let lon = 0;
 // ----------------------------
 
-// const searchButton = document.getElementById('search-button');
-// searchButton.addEventListener('click', handlingUserInput );
-
 // Updates lon and lat values
 function getCoordinates(city) {
     let requestUrl = 'https://api.openweathermap.org/geo/1.0/direct?q='+ city +'&limit=5&appid=9fa809658341d19670907599fff8fcdc';
@@ -35,9 +32,9 @@ function cityNameFormatting(city) {
 
 // Displays city name in the weather section
 function displayName(city){
-    let cityNameFormatted = cityNameFormatting(city);
-    let cityName = document.getElementById('city-name');
-    cityName.textContent = cityNameFormatted;
+        let cityNameFormatted = cityNameFormatting(city);
+        let cityName = document.getElementById('city-name');
+        cityName.textContent = cityNameFormatted;
 }
 
 //Coverts time for unix to MM/DD/YY format
@@ -155,7 +152,6 @@ function displayFutureTemps(...data) {
     for (let day=0; day<data.length; day++) {
         let daysOut = day + 1;
         let temp = data[day].main.temp.toFixed() + '°F';
-        console.log(temp);
         document.getElementById(`temp-out-${daysOut}-day`).textContent = 'Temp: ' + temp;
     }
 }
@@ -214,24 +210,6 @@ function getFiveDayWeather(lat, lon) {
     })
 }
 
-function handlingUserInput() {
-    let city = document.getElementById("userInput").value;
-    getCoordinates(city);
-    displayName(city);
-    getCurrentWeather(lat, lon);
-    getFiveDayWeather(lat, lon);
-    // cityListPopulate(city);
-
-    //Save the search location for future use
-    // let searchHistory = JSON.parse(localStorage.getItem("city")) || []
-    // searchHistory.push(city)
-    // localStorage.setItem("city", JSON.stringify(searchHistory)) 
-}
-
-// WHEN I click on a city in the search history
-// THEN I am again presented with current and future conditions for that city
-
-
 var recentSearchButtons = JSON.parse(localStorage.getItem("city")) || []
 for (let i = 0; i < recentSearchButtons.length; i++) {
     cityListPopulate(recentSearchButtons[i]); 
@@ -253,6 +231,29 @@ function cityListPopulate (city){
         getCoordinates(city);
         displayName(city);
         })
+    }
+}
+
+function handlingUserInput() {
+    let city = document.getElementById("userInput").value;
+
+    if (city != "") {
+        if (isNaN(parseInt(city))) {
+            displayName(city);
+            getCoordinates(city);
+            getCurrentWeather(lat, lon);
+            getFiveDayWeather(lat, lon);
+            cityListPopulate(city);
+
+            //Save the search location for future use
+            let searchHistory = JSON.parse(localStorage.getItem("city")) || [];
+            searchHistory.push(city);
+            localStorage.setItem("city", JSON.stringify(searchHistory));
+        } else {
+            alert ("Invalid entry: Numerical values are not accepted!");
+        }
+    } else {
+        alert ("Invalid entry: Please enter a valid city name!");
     }
 }
 

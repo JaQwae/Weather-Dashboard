@@ -134,6 +134,48 @@ function getCurrentWeather(lat, lon) {
     })
 }
 
+function displayFutureDates(...data){
+    for (let day=0; day<data.length; day++) {
+        let daysOut = day + 1;
+        let dateFormatted = dateFormatting(data[day].dt);
+        document.getElementById(`date-out-${daysOut}-day`).textContent = dateFormatted;
+    }
+}
+
+function displayingFutureIcons (...data){
+    for (let day=0; day<data.length; day++) {
+        let daysOut = day + 1;
+        let icon = data[day].weather[0].icon;
+        document.getElementById(`icon-out-${daysOut}-day`).src="https://openweathermap.org/img/w/"+ icon +".png";
+        document.getElementById(`icon-out-${daysOut}-day`).textContent;
+    }
+}
+
+function displayFutureTemps(...data) {
+    for (let day=0; day<data.length; day++) {
+        let daysOut = day + 1;
+        let temp = data[day].main.temp.toFixed() + '°F';
+        console.log(temp);
+        document.getElementById(`temp-out-${daysOut}-day`).textContent = 'Temp: ' + temp;
+    }
+}
+
+function displayFutureWindSpeed (...data){
+    for (let day=0; day<data.length; day++) {
+        let daysOut = day + 1;
+        let windSpeed = data[day].wind.speed + 'mph';
+        document.getElementById(`wind-speed-out-${daysOut}-day`).textContent = 'Wind Speed: ' + windSpeed;
+    }
+}
+
+function displayFutureHumidity (...data) {
+    for (let day=0; day<data.length; day++) {
+        let daysOut = day + 1;
+        let humidity = data[day].main.humidity;
+        document.getElementById(`humidity-out-${daysOut}-day`).textContent = 'Humidity: ' + humidity;
+    }
+}
+
 //Retrieves the weather for the next five days
 function getFiveDayWeather(lat, lon) {
     let requestUrl = 'https://api.openweathermap.org/data/2.5/forecast?lat='+ lat +'&lon='+ lon +'&units=imperial&appid=9fa809658341d19670907599fff8fcdc';
@@ -143,53 +185,40 @@ function getFiveDayWeather(lat, lon) {
             return response.json();
     })
     .then(function (data) {
+
+        let oneDayOut, twoDaysOut, threeDaysOut, fourDaysOut, fiveDaysOut; 
+        let fiveDayOutlook = [];
+
+        //Pulls weather information for the next five dates
+        oneDayOut = data.list[4]; 
+        twoDaysOut = data.list[14];
+        threeDaysOut = data.list[23];
+        fourDaysOut = data.list[29];
+        fiveDaysOut = data.list[36];
+        fiveDayOutlook.push(oneDayOut, twoDaysOut, threeDaysOut, fourDaysOut, fiveDaysOut);
+
         // pulls dates for the next five days
-        oneDayOutDate = data.list[4].dt;
-        twoDaysOutDate = data.list[14].dt;
-        threeDaysOutDate = data.list[23].dt;
-        fourDaysOutDate = data.list[29].dt;
-        fiveDaysOutDate = data.list[36].dt;
-        displayFutureDates(oneDayOutDate, twoDaysOutDate, threeDaysOutDate, fourDaysOutDate, fiveDaysOutDate);
+        displayFutureDates(...fiveDayOutlook);
 
         // pulls icons for the next five days
-        oneDayOutIcon = data.list[4].weather[0].icon;
-        twoDaysOutIcon = data.list[14].weather[0].icon;
-        threeDaysOutIcon = data.list[23].weather[0].icon;
-        fourDaysOutIcon = data.list[29].weather[0].icon;
-        fiveDaysOutIcon = data.list[36].weather[0].icon;
-        displayingFutureIcons (oneDayOutIcon, twoDaysOutIcon, threeDaysOutIcon, fourDaysOutIcon, fiveDaysOutIcon);
-
+        displayingFutureIcons (...fiveDayOutlook);
+        
         // pulls temperature for the next five days
-        oneDayOutTemp = (data.list[4].main.temp).toFixed() + ' °F';
-        twoDaysOutTemp = (data.list[14].main.temp).toFixed() + ' °F';
-        threeDaysOutTemp = (data.list[23].main.temp).toFixed() + ' °F';
-        fourDaysOutTemp = (data.list[29].main.temp).toFixed() + ' °F';
-        fiveDaysOutTemp = (data.list[36].main.temp).toFixed() + ' °F';
-        displayFutureTemps(oneDayOutTemp, twoDaysOutTemp, threeDaysOutTemp, fourDaysOutTemp, fiveDaysOutTemp);
-
+        displayFutureTemps(...fiveDayOutlook);
+        
         // pulls wind speed for the next five days
-        oneDayOutWindSpeed = (data.list[4].wind.speed) + ' mph';
-        twoDaysOutWindSpeed = (data.list[14].wind.speed) + ' mph';
-        threeDaysOutWindSpeed = (data.list[23].wind.speed) + ' mph';
-        fourDaysOutWindSpeed = (data.list[29].wind.speed) + ' mph';
-        fiveDaysOutWindSpeed = (data.list[36].wind.speed) + ' mph';
-        displayFutureWindSpeed (oneDayOutWindSpeed, twoDaysOutWindSpeed, threeDaysOutWindSpeed, fourDaysOutWindSpeed, fiveDaysOutWindSpeed);
-
+        displayFutureWindSpeed (...fiveDayOutlook);
+        
         // pulls humidity for the next five days
-        oneDayHumidity = data.list[4].main.humidity;
-        twoDaysHumidity = data.list[14].main.humidity;
-        threeDaysHumidity = data.list[23].main.humidity;
-        fourDaysHumidity = data.list[29].main.humidity;
-        fiveDaysHumidity = data.list[36].main.humidity;
-        displayFutureHumidity (oneDayHumidity, twoDaysHumidity, threeDaysHumidity, fourDaysHumidity, fiveDaysHumidity);
+        displayFutureHumidity (...fiveDayOutlook);
     })
 }
 
 function handlingUserInput() {
     let city = document.getElementById("userInput").value;
-    // getCoordinates(city);
+    getCoordinates(city);
     displayName(city);
-    // getCurrentWeather(lat, lon);
+    getCurrentWeather(lat, lon);
     getFiveDayWeather(lat, lon);
     // cityListPopulate(city);
 
@@ -197,100 +226,6 @@ function handlingUserInput() {
     // let searchHistory = JSON.parse(localStorage.getItem("city")) || []
     // searchHistory.push(city)
     // localStorage.setItem("city", JSON.stringify(searchHistory)) 
-}
-
-function displayFutureDates(oneDayOutDate, twoDaysOutDate, threeDaysOutDate, fourDaysOutDate, fiveDaysOutDate){
-    let dates = [oneDayOutDate, twoDaysOutDate, threeDaysOutDate, fourDaysOutDate, fiveDaysOutDate];
-
-    for (let day=0; day<dates.length; day++) {
-        let daysOut = day + 1;
-        let dateFormatted = dateFormatting(dates[day]);
-        document.getElementById(`date-out-${daysOut}-day`).textContent = dateFormatted;
-    }
-}
-
-function displayingFutureIcons (oneDayOutIcon, twoDaysOutIcon, threeDaysOutIcon, fourDaysOutIcon, fiveDaysOutIcon){
-    // display next day weather icon
-    document.getElementById('one-day-out-icon').src="https://openweathermap.org/img/w/"+ oneDayOutIcon +".png"; 
-    oneDayOutIcon.textContent = oneDayOutIcon;
-    
-    // display weather icon two days out
-    document.getElementById('two-days-out-icon').src="https://openweathermap.org/img/w/"+ twoDaysOutIcon +".png";
-    twoDaysOutIcon.textContent = twoDaysOutIcon;
-
-    // display weather icon three days out
-    document.getElementById('three-days-out-icon').src="https://openweathermap.org/img/w/"+ threeDaysOutIcon +".png";
-    threeDaysOutIcon.textContent =threeDaysOutIcon;
-
-    // display weather icon four days out
-    document.getElementById('four-days-out-icon').src="https://openweathermap.org/img/w/"+ fourDaysOutIcon +".png";
-    fourDaysOutIcon.textContent = fourDaysOutIcon;
-
-    // display weather icon five days out
-    document.getElementById('five-days-out-icon').src="https://openweathermap.org/img/w/"+ fiveDaysOutIcon +".png";
-    fiveDaysOutIcon.textContent = fiveDaysOutIcon;
-    
-}
-
-function displayFutureTemps(oneDayOutTemp, twoDaysOutTemp, threeDaysOutTemp, fourDaysOutTemp, fiveDaysOutTemp) {
-    // display temp for next day
-    oneDayOutTempDisplayed = document.getElementById('one-day-out-temp');
-    oneDayOutTempDisplayed.textContent = 'Temp: ' + oneDayOutTemp;
-    
-    // display temp for two days out
-    twoDaysOutTempDisplayed = document.getElementById('two-days-out-temp');
-    twoDaysOutTempDisplayed.textContent = 'Temp: ' + twoDaysOutTemp;
-
-    // display temp for three days out
-    threeDaysOutTempDisplayed = document.getElementById('three-days-out-temp');
-    threeDaysOutTempDisplayed.textContent = 'Temp: ' + threeDaysOutTemp;
-
-    // display temp for four days out
-    fourDaysOutTempDisplayed = document.getElementById('four-days-out-temp');
-    fourDaysOutTempDisplayed.textContent = 'Temp: ' + fourDaysOutTemp;
-
-    // display temp for five days out
-    fiveDaysOutTempDisplayed = document.getElementById('five-days-out-temp');
-    fiveDaysOutTempDisplayed.textContent = 'Temp: ' + fiveDaysOutTemp;
-}
-
-function displayFutureWindSpeed (oneDayOutWindSpeed, twoDaysOutWindSpeed, threeDaysOutWindSpeed, fourDaysOutWindSpeed, fiveDaysOutWindSpeed){
-    oneDayWindSpeedDisplayed = document.getElementById('one-day-out-wind');
-    oneDayWindSpeedDisplayed.textContent = 'Wind Speed: ' + oneDayOutWindSpeed;
-
-    twoDaysWindSpeedDisplayed = document.getElementById('two-days-out-wind');
-    twoDaysWindSpeedDisplayed.textContent = 'Wind Speed: ' + twoDaysOutWindSpeed;
-
-    threeDaysWindSpeedDisplayed = document.getElementById('three-days-out-wind');
-    threeDaysWindSpeedDisplayed.textContent = 'Wind Speed: ' + threeDaysOutWindSpeed;
-
-    fourDaysWindSpeedDisplayed = document.getElementById('four-days-out-wind');
-    fourDaysWindSpeedDisplayed.textContent = 'Wind Speed: ' + fourDaysOutWindSpeed;
-
-    fiveDaysWindSpeedDisplayed = document.getElementById('five-days-out-wind');
-    fiveDaysWindSpeedDisplayed.textContent = 'Wind Speed: ' + fiveDaysOutWindSpeed;
-}
-
-function displayFutureHumidity (oneDayHumidity, twoDaysHumidity, threeDaysHumidity, fourDaysHumidity, fiveDaysHumidity) {
-    // display humidity for the next day out
-    oneDayHumidityDisplayed = document.getElementById('one-day-out-humidity');
-    oneDayHumidityDisplayed.textContent = 'Humidity: ' + oneDayHumidity;
-
-    // display humidity for two days out
-    twoDaysHumidityDisplayed = document.getElementById('two-days-out-humidity')
-    twoDaysHumidityDisplayed.textContent = 'Humidity: ' + twoDaysHumidity;
-
-    // display humidity for three days out
-    threeDaysHumidityDisplayed = document.getElementById('three-days-out-humidity')
-    threeDaysHumidityDisplayed.textContent = 'Humidity: ' + threeDaysHumidity;
-
-    // display humidity for four days out
-    fourDaysHumidityDisplayed = document.getElementById('four-days-out-humidity')
-    fourDaysHumidityDisplayed.textContent = 'Humidity: ' + fourDaysHumidity;
-
-    // display humidity for five days out
-    fiveDaysHumidityDisplayed = document.getElementById('five-days-out-humidity')
-    fiveDaysHumidityDisplayed.textContent = 'Humidity: ' + fiveDaysHumidity;
 }
 
 // WHEN I click on a city in the search history

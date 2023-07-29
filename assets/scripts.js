@@ -210,45 +210,73 @@ function getFiveDayWeather(lat, lon) {
     })
 }
 
-var recentSearchButtons = JSON.parse(localStorage.getItem("city")) || []
-for (let i = 0; i < recentSearchButtons.length; i++) {
-    cityListPopulate(recentSearchButtons[i]); 
-}
+// let searchHistory = JSON.parse(localStorage.getItem("city")) || [];
+
+
+// for (let i = 0; i < recentSearchButtons.length; i++) {
+//     cityListPopulate(recentSearchButtons[i]); 
+// }
+
 
 
 //Dynamically add the passed city on the search history
-function cityListPopulate (city){
-    if(recentSearchButtons.indexOf(city) ===  -1) {
-        return;
-    }else {
-        var cityButtons = $("<button>")//+city//.toUpperCase()+"</button>");
-        cityButtons.text(city);
+function cityListPopulate(city){
+
+    if (localStorage.getItem(city) === null){
+
+        localStorage.setItem(city, JSON.stringify(0));
+
+        //Creating button based on the city
+        let cityButtons = $("<button>");
+        cityButtons.text(cityNameFormatting(city));
         $(cityButtons).addClass('title btn-large')
-        $("#history-container").append(cityButtons);
-        cityButtons.click(function(){
-        city = $(this).text();
-        cityListPopulate();
-        getCoordinates(city);
-        displayName(city);
-        })
-    }
-}
+        $("#search-history-container").append(cityButtons);
 
-function handlingUserInput() {
-    let city = document.getElementById("userInput").value;
-
-    if (city != "") {
-        if (isNaN(parseInt(city))) {
+        cityButtons.click(function() {
             displayName(city);
             getCoordinates(city);
             getCurrentWeather(lat, lon);
             getFiveDayWeather(lat, lon);
-            cityListPopulate(city);
+        })
 
-            //Save the search location for future use
-            let searchHistory = JSON.parse(localStorage.getItem("city")) || [];
-            searchHistory.push(city);
-            localStorage.setItem("city", JSON.stringify(searchHistory));
+    } else {
+        console.log("already here");
+    }
+
+    //Look up how to keep buttons on the screen after refresh
+
+    // if(recentSearchButtons.indexOf(city) === -1) {
+    //     //Save the search location for future use
+    //     console.log("not found here")
+    //     // searchHistory.push(city);
+    //     recentSearchButtons.push(city);
+    //     localStorage.setItem("city", JSON.stringify(city));
+    //     // let cityButtons = $("<button>");
+    //     // cityButtons.text(city);
+    //     // $(cityButtons).addClass('title btn-large')
+    //     // $("#search-history-container").append(cityButtons);
+    //     // cityButtons.click(function() {
+    //     //     city = $(this).text();
+    //     //     cityListPopulate();
+    //     //     getCoordinates(city);
+    //     //     displayName(city);
+    //     // })
+    // }else {
+    //     console.log("already here")
+    //     return;
+    // }
+}
+
+function handlingUserInput() {
+    let city = document.getElementById("user-input").value;
+
+    if (city != "") {
+        if (isNaN(parseInt(city))) {
+            displayName(city);
+            // getCoordinates(city);
+            // getCurrentWeather(lat, lon);
+            // getFiveDayWeather(lat, lon);
+            cityListPopulate(city);
         } else {
             alert ("Invalid entry: Numerical values are not accepted!");
         }
@@ -259,3 +287,4 @@ function handlingUserInput() {
 
 const searchButton = document.getElementById('search-button');
 searchButton.addEventListener('click', handlingUserInput );
+let recentSearchButtons = JSON.parse(localStorage.getItem("city")) || [];

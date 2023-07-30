@@ -6,20 +6,17 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Weather Dashboard</title>
-    <link 
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css"
-    />
-    <link
-    rel="stylesheet"
-    href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"
-    />
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" />
     <link rel="stylesheet" href="./assets/style.css">
 </head>
 
 <body>
     <header id="header-container">
-        <h1>Weather Dashboard <img id="header-icon" src="https://creazilla-store.fra1.digitaloceanspaces.com/cliparts/63069/weather-icon-clipart-md.png"></h1>
+        <h1>Weather Dashboard <img id="header-icon"
+                src="https://creazilla-store.fra1.digitaloceanspaces.com/cliparts/63069/weather-icon-clipart-md.png" alt="Multi-weather icon">
+        </h1>
     </header>
 
     <main class="grid-container">
@@ -31,7 +28,7 @@
                 </div>
                 <button type="button" class="btn search-btn btn-primary" id="search-button">Search</button>
             </div>
-            <div id = "search-history-container">
+            <div id="search-history-container">
                 <br>
                 <hr>
                 <br>
@@ -59,42 +56,42 @@
             <!-- date -->
             <h5 id="current-date"></h5>
             <!-- icon -->
-            <img id="current-weather-icon" src="">
+            <img id="current-weather-icon" src="" alt="current weather icon">
         </section>
         <section class="item4" id="forecasted-weather">
             <h5>5-Day outlook</h5>
             <div id="days-out">
-                <div id ='one-day-out' class="five-day-display">
+                <div id="one-day-out" class="five-day-display">
                     <div id="date-out-1-day"></div>
-                    <img src="" id="icon-out-1-day">
+                    <img src="" alt="weather icon" id="icon-out-1-day">
                     <div id="temp-out-1-day"></div>
                     <div id="wind-speed-out-1-day"></div>
                     <div id="humidity-out-1-day"></div>
                 </div>
-                <div id ='two-days-out' class="five-day-display">
+                <div id="two-days-out" class="five-day-display">
                     <div id="date-out-2-day"></div>
-                    <img src="" id="icon-out-2-day">
+                    <img src="" alt="weather icon" id="icon-out-2-day">
                     <div id="temp-out-2-day"></div>
                     <div id="wind-speed-out-2-day"></div>
                     <div id="humidity-out-2-day"></div>
                 </div>
-                <div id ='three-day-out'class="five-day-display">
+                <div id="three-day-out" class="five-day-display">
                     <div id="date-out-3-day"></div>
-                    <img src="" id="icon-out-3-day">
+                    <img src="" alt="weather icon" id="icon-out-3-day">
                     <div id="temp-out-3-day"></div>
                     <div id="wind-speed-out-3-day"></div>
                     <div id="humidity-out-3-day"></div>
                 </div>
-                <div id ='four-days-out' class="five-day-display">
+                <div id="four-days-out" class="five-day-display">
                     <div id="date-out-4-day"></div>
-                    <img src="" id="icon-out-4-day">
+                    <img src="" alt="weather icon" id="icon-out-4-day">
                     <div id="temp-out-4-day"></div>
                     <div id="wind-speed-out-4-day"></div>
                     <div id="humidity-out-4-day"></div>
                 </div>
-                <div id ='five-days-out' class="five-day-display">
+                <div id="five-days-out" class="five-day-display">
                     <div id="date-out-5-day"></div>
-                    <img src="" id="icon-out-5-day">
+                    <img src="" alt="weather icon" id="icon-out-5-day">
                     <div id="temp-out-5-day"></div>
                     <div id="wind-speed-out-5-day"></div>
                     <div id="humidity-out-5-day"></div>
@@ -102,7 +99,7 @@
             </div>
         </section>
     </main>
-    
+
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="./assets/scripts.js"></script>

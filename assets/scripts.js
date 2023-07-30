@@ -64,6 +64,11 @@ function displayingCurrentTemp(currentTemp){
     currentFTemp.textContent = 'Temp: ' + currentTemp.toFixed() + " °F";
 }
 
+function displayingFeelLikeTemp(currentFeelTemp){
+    let currentFeelLikeTemp = document.getElementById('current-feel-like-temp');
+    currentFeelLikeTemp.textContent = 'Feels like: ' + currentFeelTemp.toFixed() + " °F";
+}
+
 //displays humidity value
 function currentHumidityDisplay(currentHumidityValue) {
     let currentHumidityPlaceholder = document.getElementById('current-humidity');
@@ -116,6 +121,10 @@ function getCurrentWeather(lat, lon) {
         // grabs temp
         let currentTemp = data.current.temp;
         displayingCurrentTemp(currentTemp);
+
+        // grabs feel like temp 
+        let currentFeelTemp = data.current.feels_like;
+        displayingFeelLikeTemp(currentFeelTemp);
 
         // grabs humidity
         let currentHumidityValue = data.current.humidity;

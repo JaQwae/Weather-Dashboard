@@ -210,72 +210,42 @@ function getFiveDayWeather(lat, lon) {
     })
 }
 
-// let searchHistory = JSON.parse(localStorage.getItem("city")) || [];
+//Creates search history button and functionality
+function cityHistoryButton(city) {
+    let cityButtons = $("<button>");
+    cityButtons.text(cityNameFormatting(city));
+    $(cityButtons).addClass('title btn-large')
+    $("#search-history-container").append(cityButtons);
 
+    cityButtons.click(function() {
+        displayName(city);
+        getCoordinates(city);
+        getCurrentWeather(lat, lon);
+        getFiveDayWeather(lat, lon);
+    })
+}
 
-// for (let i = 0; i < recentSearchButtons.length; i++) {
-//     cityListPopulate(recentSearchButtons[i]); 
-// }
-
-
+//Creates search history buttons upon refresh
+for (let i=localStorage.length-1; i>=0; i--) {
+    cityHistoryButton(localStorage.key(i));
+}
 
 //Dynamically add the passed city on the search history
 function cityListPopulate(city){
-
     if (localStorage.getItem(city) === null){
-
         localStorage.setItem(city, JSON.stringify(0));
-
-        //Creating button based on the city
-        let cityButtons = $("<button>");
-        cityButtons.text(cityNameFormatting(city));
-        $(cityButtons).addClass('title btn-large')
-        $("#search-history-container").append(cityButtons);
-
-        cityButtons.click(function() {
-            displayName(city);
-            getCoordinates(city);
-            getCurrentWeather(lat, lon);
-            getFiveDayWeather(lat, lon);
-        })
-
-    } else {
-        console.log("already here");
-    }
-
-    //Look up how to keep buttons on the screen after refresh
-
-    // if(recentSearchButtons.indexOf(city) === -1) {
-    //     //Save the search location for future use
-    //     console.log("not found here")
-    //     // searchHistory.push(city);
-    //     recentSearchButtons.push(city);
-    //     localStorage.setItem("city", JSON.stringify(city));
-    //     // let cityButtons = $("<button>");
-    //     // cityButtons.text(city);
-    //     // $(cityButtons).addClass('title btn-large')
-    //     // $("#search-history-container").append(cityButtons);
-    //     // cityButtons.click(function() {
-    //     //     city = $(this).text();
-    //     //     cityListPopulate();
-    //     //     getCoordinates(city);
-    //     //     displayName(city);
-    //     // })
-    // }else {
-    //     console.log("already here")
-    //     return;
-    // }
+        cityHistoryButton(city);
+    } 
 }
 
 function handlingUserInput() {
     let city = document.getElementById("user-input").value;
-
     if (city != "") {
         if (isNaN(parseInt(city))) {
             displayName(city);
-            // getCoordinates(city);
-            // getCurrentWeather(lat, lon);
-            // getFiveDayWeather(lat, lon);
+            getCoordinates(city);
+            getCurrentWeather(lat, lon);
+            getFiveDayWeather(lat, lon);
             cityListPopulate(city);
         } else {
             alert ("Invalid entry: Numerical values are not accepted!");

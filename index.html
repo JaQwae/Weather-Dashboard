@@ -14,82 +14,79 @@
 
 <body>
     <header id="header-container">
-        <h1>Weather Dashboard <img id="header-icon"
-                src="https://creazilla-store.fra1.digitaloceanspaces.com/cliparts/63069/weather-icon-clipart-md.png" alt="Multi-weather icon">
+        <h1 id="title">Weather Dashboard <img id="header-icon"
+                src="https://creazilla-store.fra1.digitaloceanspaces.com/cliparts/63069/weather-icon-clipart-md.png"
+                alt="Multi-weather icon">
         </h1>
     </header>
 
-    <main class="grid-container">
-        <section class="item1">
-            <div id="search-container">
+    <main id="all-content-container">
+        <div id="search-content-container">
+            <section id="new-city-search-container" >
                 <h3>What is the weather in:</h3>
-                <div>
-                    <textarea id="user-input" placeholder="Enter a location"></textarea>
-                </div>
+                <textarea id="user-input" placeholder="Enter city name"></textarea>
                 <button type="button" class="btn search-btn btn-primary" id="search-button">Search</button>
-            </div>
-            <div id="search-history-container">
-                <br>
-                <hr>
-                <br>
+            </section>
+            <hr>
+            <section id="search-history-container">
                 <h4>Revisit city</h4>
-            </div>
-        </section>
-        <section class="item2">
-            <!-- city name -->
-            <h3 id="city-name"></h3>
-            <br>
-            <br>
-            <!-- temp -->
-            <h4 id="current-temp"></h4>
-            <br>
-            <!-- feels like temp -->
-            <h5 id="current-feel-like-temp"></h5>
-            <!-- humidity -->
-            <h5 id="current-humidity"></h5>
-            <!-- wind speed -->
-            <h5 id="current-wind-speed"></h5>
-            <!-- uv index -->
-            <h5 id="uv-index"></h5>
-        </section>
-        <section class="item3">
-            <!-- date -->
-            <h5 id="current-date"></h5>
-            <!-- icon -->
-            <img id="current-weather-icon" src="" alt="current weather icon">
-        </section>
-        <section class="item4" id="forecasted-weather">
-            <h5>5-Day outlook</h5>
-            <div id="days-out">
-                <div id="one-day-out" class="five-day-display">
+            </section>
+        </div>
+
+        <div id="weather-info-container">
+            <section id="current-weather-container">
+                <div id="primary-current-weather-info">
+                    <!-- city name -->
+                    <h2 id="city-name"></h2>
+                    <!-- icon -->
+                    <img id="current-weather-icon" src="" alt="current weather icon">
+                    <!-- temp -->
+                    <h4 id="current-temp"></h4>
+                </div>
+                <div id="secondary-current-weather-info">
+                    <!-- date -->
+                    <h5 id="current-date"></h5>
+                    <!-- feels like temp -->
+                    <h5 id="current-feel-like-temp"></h5>
+                    <!-- humidity -->
+                    <h5 id="current-humidity"></h5>
+                    <!-- wind speed -->
+                    <h5 id="current-wind-speed"></h5>
+                    <!-- uv index -->
+                    <h5 id="uv-index"></h5>
+                </div>
+            </section>
+
+            <div id="forecasted-weather-container">
+                <div id="one-day-out" class="days-out">
                     <div id="date-out-1-day"></div>
                     <img src="" alt="weather icon" id="icon-out-1-day">
                     <div id="temp-out-1-day"></div>
                     <div id="wind-speed-out-1-day"></div>
                     <div id="humidity-out-1-day"></div>
                 </div>
-                <div id="two-days-out" class="five-day-display">
+                <div id="two-days-out" class="days-out">
                     <div id="date-out-2-day"></div>
                     <img src="" alt="weather icon" id="icon-out-2-day">
                     <div id="temp-out-2-day"></div>
                     <div id="wind-speed-out-2-day"></div>
                     <div id="humidity-out-2-day"></div>
                 </div>
-                <div id="three-day-out" class="five-day-display">
+                <div id="three-day-out" class="days-out">
                     <div id="date-out-3-day"></div>
                     <img src="" alt="weather icon" id="icon-out-3-day">
                     <div id="temp-out-3-day"></div>
                     <div id="wind-speed-out-3-day"></div>
                     <div id="humidity-out-3-day"></div>
                 </div>
-                <div id="four-days-out" class="five-day-display">
+                <div id="four-days-out" class="days-out">
                     <div id="date-out-4-day"></div>
                     <img src="" alt="weather icon" id="icon-out-4-day">
                     <div id="temp-out-4-day"></div>
                     <div id="wind-speed-out-4-day"></div>
                     <div id="humidity-out-4-day"></div>
                 </div>
-                <div id="five-days-out" class="five-day-display">
+                <div id="five-days-out" class="days-out">
                     <div id="date-out-5-day"></div>
                     <img src="" alt="weather icon" id="icon-out-5-day">
                     <div id="temp-out-5-day"></div>
@@ -97,7 +94,7 @@
                     <div id="humidity-out-5-day"></div>
                 </div>
             </div>
-        </section>
+        </div>
     </main>
 
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>

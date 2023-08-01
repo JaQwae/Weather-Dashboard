@@ -2,45 +2,60 @@
     --purple-color: rgb(245, 65, 239);
 }
 
-/* Styling for header icons */
-#header-container{
-    background-image: linear-gradient(.25turn, lightgreen, green, yellow, orange, red, var(--purple-color), white);
+.days-out{
+    background-image: radial-gradient(#ffe4c49f,#4e8cf73a);
+}
+
+/* New styling */
+body {
+    padding:0;
+    margin: 0;
+    width:100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+#header-container {
     text-align: center;
+    background-color: red;
+}
+
+#title{
+    margin: 0.1rem;
+    font-size: 3rem;
 }
 
 #header-icon{
-    height: 60px;
+    height: 3rem;
 }
 
-.grid-container {
-    display: grid;
-    grid-template-areas:
-        'menu main main main right right'
-        'menu footer footer footer footer footer';
-    padding: 10px;
-}
-
-.item1 { 
-    grid-area: menu; 
-    background-color: rgba(78, 140, 247, 0.229);
-}
-.item2 {
-    grid-area: main;
-    background-color: rgba(255, 228, 196, 0.623);
-}
-.item3 { 
-    grid-area: right;
-    background-color: rgba(255, 228, 196, 0.623);
-}
-.item4 { 
-    grid-area: footer;
-    background-color: rgba(255, 228, 196, 0.623);
-}
-
-
-
-.five-day-display{
+#all-content-container{
+    height: 100vh;
     display: flex;
-    background-image: radial-gradient(rgba(255, 228, 196, 0.623),rgba(78, 140, 247, 0.229));
+    justify-content: center;
+    align-items: center;
+}
 
+#search-history-container{
+    display:flex;
+    flex-direction: column;
+}
+
+#new-city-search-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#forecasted-weather-container {
+    display: flex;
+}
+
+#current-weather-container{
+    display: flex;
+}
+
+.hidden {
+    display: none;
 }

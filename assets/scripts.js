@@ -227,6 +227,7 @@ function cityHistoryButton(city) {
     $("#search-history-container").append(cityButtons);
 
     cityButtons.click(function() {
+        showWeatherSection();
         displayName(city);
         getCoordinates(city);
         getCurrentWeather(lat, lon);
@@ -247,10 +248,16 @@ function cityListPopulate(city){
     } 
 }
 
+function showWeatherSection(){
+    let weatherContainer = document.getElementById("weather-info-container");
+    weatherContainer.classList.remove("hidden");
+}
+
 function handlingUserInput() {
     let city = document.getElementById("user-input").value;
     if (city != "") {
         if (isNaN(parseInt(city))) {
+            showWeatherSection();
             displayName(city);
             getCoordinates(city);
             getCurrentWeather(lat, lon);

@@ -223,7 +223,7 @@ function getFiveDayWeather(lat, lon) {
 function cityHistoryButton(city) {
     let cityButtons = $("<button>");
     cityButtons.text(cityNameFormatting(city));
-    $(cityButtons).addClass('title btn-large')
+    $(cityButtons).addClass('btn search-history-btn')
     $("#search-history-container").append(cityButtons);
 
     cityButtons.click(function() {

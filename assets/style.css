@@ -1,9 +1,7 @@
 :root{
-    --purple-color: rgb(245, 65, 239);
-}
-
-.days-out{
-    background-image: radial-gradient(#ffe4c49f,#4e8cf73a);
+    --primary-color: #4e8cf73a;
+    --secondary-color: #ffe4c49f;
+    --box-shadow-styling:#959da533 0px 8px 24px;
 }
 
 /* New styling */
@@ -18,11 +16,11 @@ body {
 
 #header-container {
     text-align: center;
-    background-color: red;
+    background-color: var(--secondary-color);
+    height: 4rem;
 }
 
 #title{
-    margin: 0.1rem;
     font-size: 3rem;
 }
 
@@ -31,17 +29,15 @@ body {
 }
 
 #all-content-container{
-    height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
+    margin: 5rem;
 }
 
 #search-history-container{
     display:flex;
     flex-direction: column;
-    /* height: calc(100vh); */
-    /* width: 20vw; */
 }
 
 #new-city-search-container{
@@ -50,17 +46,50 @@ body {
     justify-content: center;
 }
 
+#user-input{
+    height: 2rem;
+    margin: 1rem;
+    box-shadow: var(--box-shadow-styling);
+}
+
+.btn{
+    background-color: var(--secondary-color);
+    margin: 1rem;
+    color: black;
+    box-shadow: var(--box-shadow-styling);
+}
+
+.btn:hover {
+    background-color: black;
+    color: var(--secondary-color);
+}
+
 #weather-info-container{
     width:80vw;
 }
 
 #current-weather-container{
     display: flex;
-    
+    margin-bottom: 2rem;
+    /* box-shadow: var(--box-shadow-styling) */
+}
+
+#primary-current-weather-info{
+    display: flex;
+    flex-direction: column;
 }
 
 #forecasted-weather-container {
     display: flex;
+}
+
+.days-out{
+    margin: 0.5rem;
+    padding:2rem;
+    box-shadow: var(--box-shadow-styling);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .hidden {

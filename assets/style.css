@@ -52,6 +52,23 @@ body {
     box-shadow: var(--box-shadow-styling);
 }
 
+#search-history-title{
+    align-self: center;
+}
+
+#city-buttons{
+    display: flex;
+    flex-direction: column;
+}
+
+#clear-history{
+    align-self: center;
+}
+
+#clear-history:hover{
+    color:var(--secondary-color);
+}
+
 .btn{
     background-color: var(--secondary-color);
     margin: 1rem;

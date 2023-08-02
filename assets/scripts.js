@@ -224,7 +224,7 @@ function cityHistoryButton(city) {
     let cityButtons = $("<button>");
     cityButtons.text(cityNameFormatting(city));
     $(cityButtons).addClass('btn search-history-btn')
-    $("#search-history-container").append(cityButtons);
+    $("#city-buttons").append(cityButtons);
 
     cityButtons.click(function() {
         showWeatherSection();
@@ -271,6 +271,13 @@ function handlingUserInput() {
     }
 }
 
+function clearingHistory(){
+    localStorage.clear();
+    location.reload();
+}
+
 const searchButton = document.getElementById('search-button');
 searchButton.addEventListener('click', handlingUserInput );
 let recentSearchButtons = JSON.parse(localStorage.getItem("city")) || [];
+const clearHistory = document.getElementById("clear-history");
+clearHistory.addEventListener('click', clearingHistory);

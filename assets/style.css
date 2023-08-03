@@ -1,5 +1,11 @@
 :root{
     --primary-color: #ffe4c49f;
+    /* 
+        This will change color based on if the temp 
+        will be the blue that I had if is less than 55
+        will be this color if hot
+        heading will be primary color before searching then switch accordingly
+     */
     --secondary-color: #ff8c009f;
     --box-shadow-styling:#959da533 0px 8px 24px;
 }

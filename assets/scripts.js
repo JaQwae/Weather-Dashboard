@@ -258,6 +258,7 @@ function handlingUserInput() {
             getCurrentWeather(lat, lon);
             getFiveDayWeather(lat, lon);
             cityListPopulate(city);
+            checkSearchHistory();
         } else {
             alert ("Invalid entry: Numerical values are not accepted!");
         }
@@ -266,15 +267,20 @@ function handlingUserInput() {
     }
 }
 
+
 function clearingHistory(){
     localStorage.clear();
     location.reload();
 }
 
-function showSearchHistory(){
-    const searchHistoryTitle = document.getElementById("search-history-title");
-    searchHistoryTitle.classList.remove("hidden");
-    clearHistory.classList.remove("hidden");
+function checkSearchHistory(){
+    
+    if (localStorage.length > 0) {
+        const searchHistoryTitle = document.getElementById("search-history-title");
+        searchHistoryTitle.classList.remove("hidden");
+        clearHistory.classList.remove("hidden");
+    }
+    
 }
 
 //Creates search history buttons upon refresh
@@ -283,12 +289,9 @@ for (let i=localStorage.length-1; i>=0; i--) {
 }
 
 //Hides search history container if nothing is in there
-if (localStorage.length > 0) {
-    showSearchHistory();
-}
+checkSearchHistory();
 
 const searchButton = document.getElementById('search-button');
 searchButton.addEventListener('click', handlingUserInput );
 let recentSearchButtons = JSON.parse(localStorage.getItem("city")) || [];
-
 clearHistory.addEventListener('click', clearingHistory);

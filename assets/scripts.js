@@ -2,6 +2,7 @@
     //Placeholder for latitude and longitude value;
     let lat = 0;
     let lon = 0;
+    const clearHistory = document.getElementById("clear-history");
 // ----------------------------
 
 // Updates lon and lat values
@@ -234,12 +235,6 @@ function cityHistoryButton(city) {
         getFiveDayWeather(lat, lon);
     })
 }
-
-//Creates search history buttons upon refresh
-for (let i=localStorage.length-1; i>=0; i--) {
-    cityHistoryButton(localStorage.key(i));
-}
-
 //Dynamically add the passed city on the search history
 function cityListPopulate(city){
     if (localStorage.getItem(city) === null){
@@ -276,8 +271,24 @@ function clearingHistory(){
     location.reload();
 }
 
+function showSearchHistory(){
+    const searchHistoryTitle = document.getElementById("search-history-title");
+    searchHistoryTitle.classList.remove("hidden");
+    clearHistory.classList.remove("hidden");
+}
+
+//Creates search history buttons upon refresh
+for (let i=localStorage.length-1; i>=0; i--) {
+    cityHistoryButton(localStorage.key(i));
+}
+
+//Hides search history container if nothing is in there
+if (localStorage.length > 0) {
+    showSearchHistory();
+}
+
 const searchButton = document.getElementById('search-button');
 searchButton.addEventListener('click', handlingUserInput );
 let recentSearchButtons = JSON.parse(localStorage.getItem("city")) || [];
-const clearHistory = document.getElementById("clear-history");
+
 clearHistory.addEventListener('click', clearingHistory);

@@ -1,10 +1,9 @@
 :root{
-    --primary-color: #4e8cf73a;
-    --secondary-color: #ffe4c49f;
+    --primary-color: #ffe4c49f;
+    --secondary-color: #ff8c009f;
     --box-shadow-styling:#959da533 0px 8px 24px;
 }
 
-/* New styling */
 body {
     padding:0;
     margin: 0;
@@ -12,6 +11,7 @@ body {
     height: 100vh;
     display: flex;
     flex-direction: column;
+    background-color:floralwhite;
 }
 
 #header-container {
@@ -33,6 +33,10 @@ body {
     justify-content: center;
     align-items: center;
     margin: 5rem;
+}
+
+#search-content-container {
+    margin-right: 1rem;
 }
 
 #search-history-container{
@@ -66,11 +70,11 @@ body {
 }
 
 #clear-history:hover{
-    color:var(--secondary-color);
+    color:var(--primary-color);
 }
 
 .btn{
-    background-color: var(--secondary-color);
+    background-color: var(--primary-color);
     margin: 1rem;
     color: black;
     box-shadow: var(--box-shadow-styling);
@@ -78,7 +82,7 @@ body {
 
 .btn:hover {
     background-color: black;
-    color: var(--secondary-color);
+    color: var(--primary-color);
 }
 
 #weather-info-container{
@@ -88,25 +92,44 @@ body {
 #current-weather-container{
     display: flex;
     margin-bottom: 2rem;
-    /* box-shadow: var(--box-shadow-styling) */
+    box-shadow: var(--box-shadow-styling);
 }
 
 #primary-current-weather-info{
     display: flex;
     flex-direction: column;
+    align-items: center;
+    background-color: var(--primary-color);
+    flex-grow: 3;
+}
+
+#current-weather-icon {
+    height: 10rem;
+    width:  10rem;
+}
+
+#secondary-current-weather-info{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--secondary-color);
+    flex-grow: 1;
 }
 
 #forecasted-weather-container {
     display: flex;
+    justify-content: space-evenly;
 }
 
 .days-out{
-    margin: 0.5rem;
     padding:2rem;
     box-shadow: var(--box-shadow-styling);
     display: flex;
     flex-direction: column;
     align-items: center;
+    background-color: var(--secondary-color);
+    background-image: radial-gradient(circle, var(--primary-color) 30%, var(--secondary-color) 90%);
 }
 
 .hidden {

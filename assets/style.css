@@ -6,7 +6,8 @@
         will be this color if hot
         heading will be primary color before searching then switch accordingly
      */
-    --secondary-color: #ff8c009f;
+    --secondary-color-warm: #ff8c009f;
+    --secondary-color-cold: #4e8cf73a;
     --box-shadow-styling:#959da533 0px 8px 24px;
 }
 
@@ -18,11 +19,12 @@ body {
     display: flex;
     flex-direction: column;
     background-color:floralwhite;
+    
 }
 
 #header-container {
     text-align: center;
-    background-color: var(--secondary-color);
+    background-color: var(--secondary-color-warm);
     height: 4rem;
 }
 
@@ -119,7 +121,7 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: var(--secondary-color);
+    background-color: var(--secondary-color-warm);
     flex-grow: 1;
 }
 
@@ -139,10 +141,29 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: var(--secondary-color);
-    background-image: radial-gradient(circle, var(--primary-color) 30%, var(--secondary-color) 90%);
+    background-color: var(--secondary-color-warm);
+    background-image: radial-gradient(circle, var(--primary-color) 30%, var(--secondary-color-warm) 90%);
+    #forecasted-weather-container {
+    display: flex;
+    justify-content: space-evenly;
+}
 }
 
 .hidden {
     display: none;
+}
+
+@media screen and (max-width: 1030px) {
+
+    #all-content-container{
+        display: block;
+    }
+
+    #current-weather-container{
+        margin: 2rem;
+    }
+
+    #forecasted-weather-container {
+        margin: 2rem;
+    }
 }

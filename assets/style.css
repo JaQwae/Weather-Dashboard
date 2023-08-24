@@ -64,6 +64,10 @@ body {
     box-shadow: var(--box-shadow-styling);
 }
 
+#search-prompt{
+    text-align: center;
+}
+
 #search-history-title{
     align-self: center;
 }
@@ -152,18 +156,68 @@ body {
 .hidden {
     display: none;
 }
-
+/* Laptop styles */
 @media screen and (max-width: 1030px) {
 
     #all-content-container{
         display: block;
     }
 
+    #search-content-container {
+        margin-right: 0;
+    }
+
+    #search-prompt{
+        text-align: center;
+    }
+
+    #weather-info-container{
+        margin: 0rem;
+    }
+
     #current-weather-container{
-        margin: 2rem;
+        margin: 1rem;
     }
 
     #forecasted-weather-container {
         margin: 2rem;
+    }
+}
+/* Tablet styles */
+@media screen and (max-width: 760px) {
+    #all-content-container{
+        margin: 0;
+    }
+
+    #header-container {
+        height: 8rem;
+        margin-bottom: 1rem;
+    }
+
+    #title{
+        font-size: 2rem;
+    }
+
+    #header-icon {
+        height: 2rem;
+    }
+
+    #weather-info-container{
+        margin: auto;
+    }
+    
+    #current-weather-container, #forecasted-weather-container {
+        display: block;
+        margin: 1rem 0 1rem 0;
+    }
+
+    .days-out{
+        margin-bottom: 1rem;
+    }
+}
+/* Phone styles */
+@media screen and (max-width: 200px) {
+    body {
+        display: none;
     }
 }
